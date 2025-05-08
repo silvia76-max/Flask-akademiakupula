@@ -4,8 +4,7 @@ from app import db, mail
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from config import Config
-from flask import session, redirect
-
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 auth = Blueprint('auth', __name__)
 s = URLSafeTimedSerializer(Config.SECRET_KEY)
@@ -71,18 +70,24 @@ def login():
     if not user.is_confirmed:
         return jsonify({"message": "Confirma tu email antes de iniciar sesión"}), 401
 
-    return jsonify({"message": "Inicio de sesión exitoso"}), 200
-   
-    session['user_id'] = user.id
 
-    return jsonify({"message": "Inicio de sesión exitoso", "redirect": "/profile"}), 200
+    access_token = create_access_token(identity=user.id)
+    
+    return jsonify({
+        "message": "Inicio de sesión exitoso",
+        "access_token": access_token,
+        "user": {
+            "id": user.id,
+            "email": user.email,
+            "full_name": user.full_name,
+            "postal_code": user.postal_code
+        }
+    }), 200
 
 @auth.route('/profile', methods=['GET'])
+@jwt_required()  
 def profile():
-    user_id = session.get('user_id')
-    if not user_id:
-        return jsonify({"message": "No autorizado"}), 401
-
+    user_id = get_jwt_identity()
     user = User.query.get(user_id)
 
     if not user:
@@ -97,6 +102,4 @@ def profile():
 
 @auth.route('/logout', methods=['POST'])
 def logout():
-    session.pop('user_id', None)
-    return jsonify({"message": "Sesión cerrada correctamente"}), 200    
-    
+    return jsonify({"message": "Sesión cerrada correctamente"}), 200
