@@ -26,8 +26,19 @@ def create_app():
     # Configuración básica
     app.config.from_object('config.Config')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///akademiakupula.db'
+<<<<<<< HEAD
     app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY') or 'tu-clave-secreta'  
     app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or 'otra-clave'  
+=======
+    app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY') or 'tu-clave-secreta'  # Usa la misma en todos lados
+    app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or 'otra-clave' 
+    app.config.update(
+    SESSION_COOKIE_SECURE=False,  # True en producción con HTTPS
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax'
+)
+    # Configuración CORS (correctamente indentada dentro de create_app)
+>>>>>>> e8c813ae5300349b59cca8d256b69a6df9b8e9e7
     CORS(app, resources={
         r"/api/*": {
             "origins": ["http://localhost:5173", "http://127.0.0.1:5173"],
