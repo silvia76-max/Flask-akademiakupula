@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 
 
-
+# Inicializar extensiones (fuera de create_app para poder importarlas en otros archivos)
 bcrypt = Bcrypt()
 jwt = JWTManager()
 migrate = Migrate()
@@ -26,8 +26,9 @@ def create_app():
     # Configuración básica
     app.config.from_object('config.Config')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///akademiakupula.db'
-    app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY') or 'tu-clave-secreta'  
-    app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or 'otra-clave'  
+    app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY') or 'tu-clave-secreta'  # Usa la misma en todos lados
+    app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or 'otra-clave'  # Solo para sesiones
+    # Configuración CORS (correctamente indentada dentro de create_app)
     CORS(app, resources={
         r"/api/*": {
             "origins": ["http://localhost:5173", "http://127.0.0.1:5173"],
@@ -37,14 +38,14 @@ def create_app():
         }
     })
     
- 
+    # Inicializar extensiones con la app (también indentado correctamente)
     db.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
     migrate.init_app(app, db)
     mail.init_app(app)
 
-
+    # Importar blueprints aquí para evitar importaciones circulares
     from app.routes.auth_routes import auth
     from app.routes.cursos import cursos_bp
     from app.routes.test_routes import test_bp
