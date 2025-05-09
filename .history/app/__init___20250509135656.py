@@ -9,7 +9,7 @@ from flask_mail import Mail
 import logging
 
 # Load environment variables from .env file
-from dotenv import load_dotenv  # Use the official python-dotenv package
+from dotenv import load_dotenv
 load_dotenv()  # This loads the .env file into environment variables
 
 # Basic logging configuration

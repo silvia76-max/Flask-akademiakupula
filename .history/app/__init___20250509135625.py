@@ -9,7 +9,7 @@ from flask_mail import Mail
 import logging
 
 # Load environment variables from .env file
-from dotenv import load_dotenv  # Use the official python-dotenv package
+from dotenv import load_dotenv
 load_dotenv()  # This loads the .env file into environment variables
 
 # Basic logging configuration
@@ -74,31 +74,23 @@ def create_app():
     app.register_blueprint(test_bp, url_prefix='/api/test')
     app.register_blueprint(contacto_bp, url_prefix='/api/contacto')
 
-    # Set up error handlers
+    # Error handlers
     logger.info("Setting up error handlers")
-
-    # Define a function to create standardized error responses
-    def make_error_response(message, status_code):
-        """Create a standardized JSON error response"""
+    @app.errorhandler(404)
+    def not_found(_):
         return jsonify({
             "success": False,
-            "message": message,
+            "message": "Resource not found",
             "data": None
-        }), status_code
-
-    # Register error handlers
-    # Note: IDE may show these functions as unused, but Flask uses them through decorators
-    @app.errorhandler(404)
-    def handle_not_found_error(error):
-        """Handle 404 Not Found errors"""
-        logger.warning(f"404 error: {error}")
-        return make_error_response("Resource not found", 404)
+        }), 404
 
     @app.errorhandler(500)
-    def handle_server_error(error):
-        """Handle 500 Internal Server Error"""
-        logger.error(f"500 error: {error}")
-        return make_error_response("Internal server error", 500)
+    def server_error(_):
+        return jsonify({
+            "success": False,
+            "message": "Internal server error",
+            "data": None
+        }), 500
 
     logger.info("Flask application created successfully")
     return app

@@ -59,43 +59,20 @@ def register():
 def confirm_email(token):
     try:
         email = s.loads(token, salt='email-confirm', max_age=3600)
-
-        user = User.query.filter_by(email=email).first_or_404()
-
-        if user.is_confirmed:
-            return jsonify({
-                "success": True,
-                "message": "Cuenta ya confirmada.",
-                "data": {"email": email}
-            }), 200
-
-        user.is_confirmed = True
-        db.session.commit()
-
-        return jsonify({
-            "success": True,
-            "message": "Cuenta confirmada correctamente.",
-            "data": {"email": email}
-        }), 200
     except SignatureExpired:
-        return jsonify({
-            "success": False,
-            "message": "El enlace de confirmación ha expirado.",
-            "data": None
-        }), 400
+        return jsonify({"message": "El enlace de confirmación ha expirado."}), 400
     except BadSignature:
-        return jsonify({
-            "success": False,
-            "message": "El enlace de confirmación es inválido.",
-            "data": None
-        }), 400
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({
-            "success": False,
-            "message": f"Error al confirmar email: {str(e)}",
-            "data": None
-        }), 500
+        return jsonify({"message": "El enlace de confirmación es inválido."}), 400
+
+    user = User.query.filter_by(email=email).first_or_404()
+
+    if user.is_confirmed:
+        return jsonify({"message": "Cuenta ya confirmada."}), 200
+
+    user.is_confirmed = True
+    db.session.commit()
+
+    return jsonify({"message": "Cuenta confirmada correctamente."}), 200
 
 @auth.route('/login', methods=['POST'])
 def login():

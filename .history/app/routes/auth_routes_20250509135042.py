@@ -59,43 +59,20 @@ def register():
 def confirm_email(token):
     try:
         email = s.loads(token, salt='email-confirm', max_age=3600)
-
-        user = User.query.filter_by(email=email).first_or_404()
-
-        if user.is_confirmed:
-            return jsonify({
-                "success": True,
-                "message": "Cuenta ya confirmada.",
-                "data": {"email": email}
-            }), 200
-
-        user.is_confirmed = True
-        db.session.commit()
-
-        return jsonify({
-            "success": True,
-            "message": "Cuenta confirmada correctamente.",
-            "data": {"email": email}
-        }), 200
     except SignatureExpired:
-        return jsonify({
-            "success": False,
-            "message": "El enlace de confirmación ha expirado.",
-            "data": None
-        }), 400
+        return jsonify({"message": "El enlace de confirmación ha expirado."}), 400
     except BadSignature:
-        return jsonify({
-            "success": False,
-            "message": "El enlace de confirmación es inválido.",
-            "data": None
-        }), 400
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({
-            "success": False,
-            "message": f"Error al confirmar email: {str(e)}",
-            "data": None
-        }), 500
+        return jsonify({"message": "El enlace de confirmación es inválido."}), 400
+
+    user = User.query.filter_by(email=email).first_or_404()
+
+    if user.is_confirmed:
+        return jsonify({"message": "Cuenta ya confirmada."}), 200
+
+    user.is_confirmed = True
+    db.session.commit()
+
+    return jsonify({"message": "Cuenta confirmada correctamente."}), 200
 
 @auth.route('/login', methods=['POST'])
 def login():
@@ -145,36 +122,19 @@ def login():
 @auth.route('/profile', methods=['GET'])
 @jwt_required()
 def profile():
-    try:
-        user_id = get_jwt_identity()
-        user = User.query.get(user_id)
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
 
-        if not user:
-            return jsonify({"success": False, "message": "Usuario no encontrado"}), 404
+    if not user:
+        return jsonify({"message": "Usuario no encontrado"}), 404
 
-        return jsonify({
-            "success": True,
-            "message": "Bienvenido a tu perfil",
-            "data": {
-                "full_name": user.full_name,
-                "email": user.email,
-                "postal_code": user.postal_code,
-                "id": user.id
-            }
-        }), 200
-    except Exception as e:
-        return jsonify({"success": False, "message": f"Error al obtener perfil: {str(e)}"}), 500
+    return jsonify({
+        "full_name": user.full_name,
+        "email": user.email,
+        "postal_code": user.postal_code,
+        "message": "Bienvenido a tu perfil"
+    }), 200
 
 @auth.route('/logout', methods=['POST'])
-@jwt_required()
 def logout():
-    try:
-        # En una implementación real, aquí podrías añadir el token a una lista negra
-        # para invalidarlo antes de su expiración
-        return jsonify({
-            "success": True,
-            "message": "Sesión cerrada correctamente",
-            "data": None
-        }), 200
-    except Exception as e:
-        return jsonify({"success": False, "message": f"Error al cerrar sesión: {str(e)}"}), 500
+    return jsonify({"message": "Sesión cerrada correctamente"}), 200

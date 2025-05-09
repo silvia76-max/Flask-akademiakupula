@@ -3,26 +3,24 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
+from dotenv import load_dotenv
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 import logging
 
-# Load environment variables from .env file
-from dotenv import load_dotenv  # Use the official python-dotenv package
-load_dotenv()  # This loads the .env file into environment variables
-
-# Basic logging configuration
+# Configuración básica de logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
-# Initialize Flask extensions
+
 bcrypt = Bcrypt()
 jwt = JWTManager()
 migrate = Migrate()
+load_dotenv()
 db = SQLAlchemy()
 mail = Mail()
 
@@ -67,38 +65,27 @@ def create_app():
     from app.routes.test_routes import test_bp
     from app.routes.contacto_routes import contacto_bp
 
-    # Register blueprints
-    logger.info("Registering blueprints")
+    # Registrar blueprints
     app.register_blueprint(auth, url_prefix='/api/auth')
     app.register_blueprint(cursos_bp, url_prefix='/api/cursos')
     app.register_blueprint(test_bp, url_prefix='/api/test')
     app.register_blueprint(contacto_bp, url_prefix='/api/contacto')
 
-    # Set up error handlers
-    logger.info("Setting up error handlers")
-
-    # Define a function to create standardized error responses
-    def make_error_response(message, status_code):
-        """Create a standardized JSON error response"""
+    # Error handlers
+    @app.errorhandler(404)
+    def not_found(_):
         return jsonify({
             "success": False,
-            "message": message,
+            "message": "Resource not found",
             "data": None
-        }), status_code
-
-    # Register error handlers
-    # Note: IDE may show these functions as unused, but Flask uses them through decorators
-    @app.errorhandler(404)
-    def handle_not_found_error(error):
-        """Handle 404 Not Found errors"""
-        logger.warning(f"404 error: {error}")
-        return make_error_response("Resource not found", 404)
+        }), 404
 
     @app.errorhandler(500)
-    def handle_server_error(error):
-        """Handle 500 Internal Server Error"""
-        logger.error(f"500 error: {error}")
-        return make_error_response("Internal server error", 500)
+    def server_error(_):
+        return jsonify({
+            "success": False,
+            "message": "Internal server error",
+            "data": None
+        }), 500
 
-    logger.info("Flask application created successfully")
     return app
