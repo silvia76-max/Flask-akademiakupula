@@ -47,6 +47,8 @@ def crear_contacto():
         nuevo_contacto = Contacto(
             nombre=data['nombre'],
             email=data['email'],
+            telefono=data.get('telefono', ''),
+            curso=data.get('curso', ''),
             mensaje=data['mensaje']
         )
         db.session.add(nuevo_contacto)
@@ -60,6 +62,8 @@ def crear_contacto():
                 "id": nuevo_contacto.id,
                 "nombre": nuevo_contacto.nombre,
                 "email": nuevo_contacto.email,
+                "telefono": nuevo_contacto.telefono,
+                "curso": nuevo_contacto.curso,
                 "mensaje": nuevo_contacto.mensaje,
                 "fecha_creacion": nuevo_contacto.fecha_creacion.isoformat()
             }
@@ -88,6 +92,8 @@ def obtener_mensajes():
                 "id": mensaje.id,
                 "nombre": mensaje.nombre,
                 "email": mensaje.email,
+                "telefono": mensaje.telefono,
+                "curso": mensaje.curso,
                 "mensaje": mensaje.mensaje,
                 "fecha_creacion": mensaje.fecha_creacion.isoformat()
             })

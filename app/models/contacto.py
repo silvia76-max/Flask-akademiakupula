@@ -2,10 +2,12 @@ from app import db
 
 class Contacto(db.Model):
     __tablename__ = 'contactos'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=False)
+    telefono = db.Column(db.String(20), nullable=True)
+    curso = db.Column(db.String(50), nullable=True)
     mensaje = db.Column(db.Text, nullable=False)
     fecha_creacion = db.Column(db.DateTime, server_default=db.func.now())
 

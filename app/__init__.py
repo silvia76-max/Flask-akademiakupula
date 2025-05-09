@@ -14,16 +14,17 @@ load_dotenv()  # This loads the .env file into environment variables
 
 # Basic logging configuration
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,  # Cambiado a DEBUG para ver más información
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
-# Initialize Flask extensions
+# Initialize Flask extensions - Creamos una única instancia de cada extensión
+# Estas instancias se compartirán en toda la aplicación
+db = SQLAlchemy()
 bcrypt = Bcrypt()
 jwt = JWTManager()
 migrate = Migrate()
-db = SQLAlchemy()
 mail = Mail()
 
 
@@ -31,19 +32,30 @@ def create_app():
     logger.info("Creating Flask application")
     app = Flask(__name__)
 
-
     # Basic configuration
     logger.info("Loading application configuration")
     app.config.from_object('config.Config')
+
+    # Configurar la URI de la base de datos explícitamente
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///akademiakupula.db'
-    app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY') or 'your-secret-key'  # Use the same key everywhere
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # Configurar claves secretas
+    app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY') or 'your-secret-key'
     app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY') or 'another-key'
+
+    # Imprimir la configuración para depuración
+    logger.info(f"SQLALCHEMY_DATABASE_URI: {app.config.get('SQLALCHEMY_DATABASE_URI')}")
+
+    # Configuración de cookies
     app.config.update(
         SESSION_COOKIE_SECURE=False,  # Set to True in production with HTTPS
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE='Lax'
     )
-    # CORS configuration
+
+    # CORS configuration - Permitir solicitudes desde el frontend
+    logger.info("Configurando CORS")
     CORS(app, resources={
         r"/api/*": {
             "origins": ["http://localhost:5173", "http://127.0.0.1:5173"],
@@ -53,13 +65,31 @@ def create_app():
         }
     })
 
-
+    # Inicializar extensiones con la aplicación
     logger.info("Initializing extensions")
     db.init_app(app)
+    logger.info("SQLAlchemy initialized")
+
     bcrypt.init_app(app)
+    logger.info("Bcrypt initialized")
+
     jwt.init_app(app)
+    logger.info("JWT initialized")
+
     migrate.init_app(app, db)
+    logger.info("Migrate initialized")
+
     mail.init_app(app)
+    logger.info("Mail initialized")
+
+    # Crear todas las tablas si no existen
+    with app.app_context():
+        try:
+            logger.info("Creating database tables if they don't exist")
+            db.create_all()
+            logger.info("Database tables created successfully")
+        except Exception as e:
+            logger.error(f"Error creating database tables: {e}")
 
 
     from app.routes.auth_routes import auth
