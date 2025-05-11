@@ -58,7 +58,15 @@ def crear_contacto():
         return jsonify({
             "success": True,
             "message": "Mensaje recibido correctamente",
-            "data": nuevo_contacto.to_dict()
+            "data": {
+                "id": nuevo_contacto.id,
+                "nombre": nuevo_contacto.nombre,
+                "email": nuevo_contacto.email,
+                "telefono": nuevo_contacto.telefono,
+                "curso": nuevo_contacto.curso,
+                "mensaje": nuevo_contacto.mensaje,
+                "fecha_creacion": nuevo_contacto.fecha_creacion.isoformat()
+            }
         }), 201
 
     except Exception as e:
@@ -80,7 +88,15 @@ def obtener_mensajes():
         resultado = []
 
         for mensaje in mensajes:
-            resultado.append(mensaje.to_dict())
+            resultado.append({
+                "id": mensaje.id,
+                "nombre": mensaje.nombre,
+                "email": mensaje.email,
+                "telefono": mensaje.telefono,
+                "curso": mensaje.curso,
+                "mensaje": mensaje.mensaje,
+                "fecha_creacion": mensaje.fecha_creacion.isoformat()
+            })
 
         return jsonify({
             "success": True,

@@ -20,7 +20,7 @@ class Contacto(db.Model):
 
     # Campos de auditoría
     fecha_creacion = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
-    fecha_actualizacion = db.Column(db.DateTime, nullable=True)
+    fecha_actualizacion = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     # Índices adicionales
     __table_args__ = (

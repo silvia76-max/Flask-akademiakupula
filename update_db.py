@@ -1,26 +1,101 @@
 """
-Script simple para actualizar la base de datos.
-Ajusta las importaciones según la estructura de tu proyecto.
+Script para actualizar la estructura de la base de datos.
 """
 
-# Ajusta estas importaciones según la estructura de tu proyecto
-try:
-    from run import app
-    from models import db
-    
-    print("Importaciones exitosas.")
-    
-    with app.app_context():
-        db.create_all()
-        print("Base de datos actualizada con éxito.")
-        print("Se han creado las tablas si no existían previamente.")
-        
-except ImportError as e:
-    print(f"Error de importación: {e}")
-    print("\nAjusta las importaciones según la estructura de tu proyecto.")
-    print("Por ejemplo, si tu aplicación está en un paquete 'app':")
-    print("from app import app")
-    print("from app.models import db")
-    
-except Exception as e:
-    print(f"Error al actualizar la base de datos: {e}")
+import os
+import sys
+import logging
+import sqlite3
+
+# Configurar logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('update_db.log')
+    ]
+)
+
+logger = logging.getLogger(__name__)
+
+def main():
+    try:
+        logger.info("Iniciando actualización de la base de datos")
+
+        # Conectar a la base de datos
+        db_path = 'instance/akademiakupula.db'
+
+        if not os.path.exists(db_path):
+            logger.error(f"La base de datos no existe en la ruta: {db_path}")
+            return
+
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+
+        logger.info("Conexión a la base de datos establecida")
+
+        # Verificar si la tabla users existe
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='users'")
+        if not cursor.fetchone():
+            logger.error("La tabla 'users' no existe")
+            return
+
+        # Verificar las columnas existentes
+        cursor.execute("PRAGMA table_info(users)")
+        columns = [column[1] for column in cursor.fetchall()]
+        logger.info(f"Columnas existentes: {columns}")
+
+        # Añadir columnas faltantes
+        columns_to_add = {
+            'is_active': 'BOOLEAN DEFAULT 1',
+            'is_admin': 'BOOLEAN DEFAULT 0',
+            'last_login': 'DATETIME',
+            'failed_login_attempts': 'INTEGER DEFAULT 0',
+            'locked_until': 'DATETIME',
+            'created_at': 'DATETIME',
+            'updated_at': 'DATETIME'
+        }
+
+        for column, definition in columns_to_add.items():
+            if column not in columns:
+                try:
+                    logger.info(f"Añadiendo columna: {column}")
+                    cursor.execute(f"ALTER TABLE users ADD COLUMN {column} {definition}")
+                    logger.info(f"Columna {column} añadida correctamente")
+                except Exception as e:
+                    logger.error(f"Error al añadir columna {column}: {str(e)}")
+
+        # Guardar cambios
+        conn.commit()
+        logger.info("Cambios guardados correctamente")
+
+        # Verificar las columnas actualizadas
+        cursor.execute("PRAGMA table_info(users)")
+        updated_columns = [column[1] for column in cursor.fetchall()]
+        logger.info(f"Columnas actualizadas: {updated_columns}")
+
+        # Cerrar conexión
+        conn.close()
+        logger.info("Actualización de la base de datos completada")
+
+        # Ahora vamos a probar la aplicación
+        logger.info("Probando la aplicación con la base de datos actualizada")
+
+        from app import create_app
+        app = create_app()
+
+        with app.app_context():
+            from app.models.user import User
+
+            # Intentar consultar usuarios
+            users = User.query.all()
+            logger.info(f"Consulta exitosa. Usuarios encontrados: {len(users)}")
+
+            logger.info("Prueba completada con éxito")
+
+    except Exception as e:
+        logger.error(f"Error durante la actualización: {str(e)}", exc_info=True)
+
+if __name__ == "__main__":
+    main()

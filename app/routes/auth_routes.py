@@ -1,218 +1,365 @@
-from flask import Blueprint, request, jsonify, url_for
-from app.models import User
-from app import db, mail
+"""
+Rutas de autenticación para la API.
+Este módulo contiene las rutas para registro, login, perfil y otras funcionalidades relacionadas con la autenticación.
+"""
+
+from flask import Blueprint, request, current_app
+from app.models.user import User
+from app import db, mail, cache, limiter
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
-from config import Config
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import (
+    create_access_token, create_refresh_token,
+    jwt_required, get_jwt_identity, get_jwt
+)
+import logging
+from datetime import datetime, timezone
+from app.utils import validate_email, validate_required_fields, standardize_response, log_api_call
 
+# Configurar logger
+logger = logging.getLogger(__name__)
+
+# Crear blueprint
 auth = Blueprint('auth', __name__)
-s = URLSafeTimedSerializer(Config.SECRET_KEY)
+
+# El serializador se inicializará en cada función que lo necesite
+# para evitar acceder a current_app fuera del contexto de la aplicación
 
 @auth.route('/register', methods=['POST'])
+@limiter.limit("10/hour")  # Limitar a 10 registros por hora por IP
+@log_api_call
 def register():
+    """Registra un nuevo usuario."""
     try:
-        print("Recibida solicitud de registro")
+        # Registrar en un archivo para depuración
+        with open('register_debug.log', 'a') as f:
+            f.write("Recibida solicitud de registro\n")
+
+        logger.info("Recibida solicitud de registro")
         data = request.get_json()
-        print(f"Datos recibidos: {data}")
+
+        # Registrar datos recibidos
+        with open('register_debug.log', 'a') as f:
+            f.write(f"Datos recibidos: {data}\n")
+
+        # Validar campos requeridos
+        required_fields = ['full_name', 'postal_code', 'email', 'password']
+        valid, missing_fields = validate_required_fields(data, required_fields)
+
+        if not valid:
+            logger.warning(f"Faltan campos obligatorios: {missing_fields}")
+            with open('register_debug.log', 'a') as f:
+                f.write(f"Faltan campos obligatorios: {missing_fields}\n")
+            return standardize_response(
+                False,
+                f"Faltan campos obligatorios: {', '.join(missing_fields)}",
+                status_code=400
+            )
 
         full_name = data.get('full_name')
         postal_code = data.get('postal_code')
         email = data.get('email')
         password = data.get('password')
 
-        # Validar que todos los campos requeridos estén presentes
-        if not all([full_name, postal_code, email, password]):
-            print("Error: Faltan campos obligatorios")
-            return jsonify({"success": False, "message": "Todos los campos son obligatorios"}), 400
-
         # Validar formato de email
-        import re
-        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            print("Error: Formato de email inválido")
-            return jsonify({"success": False, "message": "Formato de email inválido"}), 400
+        if not validate_email(email):
+            logger.warning(f"Formato de email inválido: {email}")
+            with open('register_debug.log', 'a') as f:
+                f.write(f"Formato de email inválido: {email}\n")
+            return standardize_response(False, "Formato de email inválido", status_code=400)
 
         # Validar longitud de contraseña
-        if len(password) < 6:
-            print("Error: Contraseña demasiado corta")
-            return jsonify({"success": False, "message": "La contraseña debe tener al menos 6 caracteres"}), 400
+        if len(password) < 8:
+            logger.warning("Contraseña demasiado corta")
+            with open('register_debug.log', 'a') as f:
+                f.write("Contraseña demasiado corta\n")
+            return standardize_response(
+                False,
+                "La contraseña debe tener al menos 8 caracteres",
+                status_code=400
+            )
 
         # Verificar si el email ya está registrado
-        existing_user = User.query.filter_by(email=email).first()
+        with open('register_debug.log', 'a') as f:
+            f.write(f"Verificando si el email ya está registrado: {email}\n")
+
+        existing_user = User.get_by_email(email)
         if existing_user:
-            print(f"Error: Email {email} ya registrado")
-            return jsonify({"success": False, "message": "Email ya registrado"}), 400
+            logger.warning(f"Email ya registrado: {email}")
+            with open('register_debug.log', 'a') as f:
+                f.write(f"Email ya registrado: {email}\n")
+            return standardize_response(False, "Email ya registrado", status_code=400)
 
-        # Crear nuevo usuario
-        print(f"Creando nuevo usuario: {full_name}, {email}")
-        user = User(full_name=full_name, postal_code=postal_code, email=email)
-        user.set_password(password)
+        # Crear nuevo usuario usando el método de clase
+        with open('register_debug.log', 'a') as f:
+            f.write(f"Creando nuevo usuario: {full_name}, {email}\n")
 
-        # Marcar como confirmado automáticamente
-        user.is_confirmed = True
+        try:
+            # Crear usuario directamente sin usar el método de clase
+            with open('register_debug.log', 'a') as f:
+                f.write("Creando usuario directamente en la ruta\n")
 
-        # Guardar en la base de datos
-        db.session.add(user)
-        db.session.commit()
-        print(f"Usuario creado con ID: {user.id}")
+            # Crear instancia de usuario
+            user = User(
+                full_name=full_name,
+                email=email,
+                postal_code=postal_code,
+                is_confirmed=True  # Confirmación automática para simplificar
+            )
 
-        # Generar token para inicio de sesión automático
-        access_token = create_access_token(identity=user.id)
+            with open('register_debug.log', 'a') as f:
+                f.write("Usuario instanciado correctamente\n")
 
-        return jsonify({
-            "success": True,
-            "message": "Registro exitoso. Tu cuenta ha sido activada automáticamente.",
-            "data": {
-                "access_token": access_token,
-                "user": {
-                    "id": user.id,
-                    "email": user.email,
-                    "full_name": user.full_name,
-                    "postal_code": user.postal_code
-                }
-            }
-        }), 201
+            # Establecer contraseña
+            user.set_password(password)
+
+            with open('register_debug.log', 'a') as f:
+                f.write("Contraseña establecida correctamente\n")
+
+            # Añadir a la sesión y hacer commit
+            db.session.add(user)
+
+            with open('register_debug.log', 'a') as f:
+                f.write("Usuario añadido a la sesión\n")
+
+            db.session.commit()
+
+            with open('register_debug.log', 'a') as f:
+                f.write(f"Usuario creado con ID: {user.id}\n")
+
+            logger.info(f"Usuario creado con ID: {user.id}")
+
+            # Generar tokens
+            access_token = create_access_token(identity=user.id)
+            refresh_token = create_refresh_token(identity=user.id)
+
+            # Invalidar caché
+            cache.delete_memoized(User.get_by_email, User, email)
+
+            return standardize_response(
+                True,
+                "Registro exitoso. Tu cuenta ha sido activada automáticamente.",
+                {
+                    "access_token": access_token,
+                    "refresh_token": refresh_token,
+                    "user": user.to_dict()
+                },
+                status_code=201
+            )
+        except Exception as e:
+            with open('register_debug.log', 'a') as f:
+                f.write(f"Error al crear usuario: {str(e)}\n")
+            raise
     except Exception as e:
         db.session.rollback()
-        print(f"Error en el registro: {str(e)}")
-        return jsonify({"success": False, "message": f"Error en el registro: {str(e)}"}), 500
+        logger.error(f"Error en el registro: {str(e)}", exc_info=True)
+        with open('register_debug.log', 'a') as f:
+            f.write(f"Error en el registro: {str(e)}\n")
+            import traceback
+            f.write(traceback.format_exc())
+        return standardize_response(False, "Error en el registro", status_code=500)
 
 @auth.route('/confirm-email/<token>', methods=['GET'])
+@limiter.limit("10/hour")  # Limitar a 10 confirmaciones por hora por IP
+@log_api_call
 def confirm_email(token):
+    """Confirma la cuenta de un usuario a través de un token enviado por email."""
     try:
+        # Inicializar serializador dentro del contexto de la aplicación
+        s = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+
+        # Desencriptar el token
         email = s.loads(token, salt='email-confirm', max_age=3600)
+        logger.info(f"Solicitud de confirmación para email: {email}")
 
-        user = User.query.filter_by(email=email).first_or_404()
+        # Buscar usuario por email
+        user = User.get_by_email(email)
 
+        if not user:
+            logger.warning(f"Usuario no encontrado para confirmación: {email}")
+            return standardize_response(False, "Usuario no encontrado", status_code=404)
+
+        # Verificar si ya está confirmado
         if user.is_confirmed:
-            return jsonify({
-                "success": True,
-                "message": "Cuenta ya confirmada.",
-                "data": {"email": email}
-            }), 200
+            logger.info(f"Cuenta ya confirmada: {email}")
+            return standardize_response(
+                True,
+                "Cuenta ya confirmada",
+                {"email": email}
+            )
 
+        # Confirmar cuenta
         user.is_confirmed = True
         db.session.commit()
+        logger.info(f"Cuenta confirmada correctamente: {email}")
 
-        return jsonify({
-            "success": True,
-            "message": "Cuenta confirmada correctamente.",
-            "data": {"email": email}
-        }), 200
+        # Invalidar caché
+        cache.delete_memoized(User.get_by_email, User, email)
+
+        return standardize_response(
+            True,
+            "Cuenta confirmada correctamente",
+            {"email": email}
+        )
     except SignatureExpired:
-        return jsonify({
-            "success": False,
-            "message": "El enlace de confirmación ha expirado.",
-            "data": None
-        }), 400
+        logger.warning(f"Token de confirmación expirado: {token[:10]}...")
+        return standardize_response(
+            False,
+            "El enlace de confirmación ha expirado",
+            status_code=400
+        )
     except BadSignature:
-        return jsonify({
-            "success": False,
-            "message": "El enlace de confirmación es inválido.",
-            "data": None
-        }), 400
+        logger.warning(f"Token de confirmación inválido: {token[:10]}...")
+        return standardize_response(
+            False,
+            "El enlace de confirmación es inválido",
+            status_code=400
+        )
     except Exception as e:
         db.session.rollback()
-        return jsonify({
-            "success": False,
-            "message": f"Error al confirmar email: {str(e)}",
-            "data": None
-        }), 500
+        logger.error(f"Error al confirmar email: {str(e)}", exc_info=True)
+        return standardize_response(
+            False,
+            "Error al confirmar email",
+            status_code=500
+        )
 
 @auth.route('/login', methods=['POST'])
+@limiter.limit("20/minute")  # Limitar a 20 intentos de login por minuto por IP
+@log_api_call
 def login():
+    """Inicia sesión de un usuario."""
     try:
-        print("Recibida solicitud de login")
+        logger.info("Recibida solicitud de login")
         data = request.get_json()
-        print(f"Datos recibidos: {data}")
 
-        # Validar que se proporcionaron email y password
-        if not data or 'email' not in data or 'password' not in data:
-            print("Error: Faltan email o contraseña")
-            return jsonify({
-                "success": False,
-                "message": "Email y contraseña son requeridos"
-            }), 400
+        # Validar campos requeridos
+        required_fields = ['email', 'password']
+        valid, missing_fields = validate_required_fields(data, required_fields)
+
+        if not valid:
+            logger.warning(f"Faltan campos obligatorios: {missing_fields}")
+            return standardize_response(
+                False,
+                f"Faltan campos obligatorios: {', '.join(missing_fields)}",
+                status_code=400
+            )
 
         email = data.get('email')
         password = data.get('password')
 
         # Buscar usuario por email
-        print(f"Buscando usuario con email: {email}")
-        user = User.query.filter_by(email=email).first()
+        user = User.get_by_email(email)
 
         if not user:
-            print(f"Error: Usuario con email {email} no encontrado")
-            return jsonify({"success": False, "message": "Credenciales inválidas"}), 401
+            logger.warning(f"Usuario no encontrado: {email}")
+            return standardize_response(False, "Credenciales inválidas", status_code=401)
+
+        # Verificar si la cuenta está bloqueada
+        if user.is_locked:
+            logger.warning(f"Cuenta bloqueada: {email}")
+            return standardize_response(
+                False,
+                "Cuenta bloqueada temporalmente por múltiples intentos fallidos",
+                status_code=401
+            )
 
         # Verificar contraseña
         if not user.check_password(password):
-            print("Error: Contraseña incorrecta")
-            return jsonify({"success": False, "message": "Credenciales inválidas"}), 401
+            # El método check_password ya incrementa los intentos fallidos
+            db.session.commit()
+            logger.warning(f"Contraseña incorrecta para: {email}")
+            return standardize_response(False, "Credenciales inválidas", status_code=401)
 
         # Verificar si la cuenta está confirmada
         if not user.is_confirmed:
-            print(f"Error: Usuario {email} no confirmado")
+            logger.warning(f"Cuenta no confirmada: {email}")
             # Confirmar automáticamente para simplificar
             user.is_confirmed = True
-            db.session.commit()
-            print(f"Usuario {email} confirmado automáticamente")
 
-        # Generar token con tiempo de expiración (1 día)
-        print(f"Generando token para usuario ID: {user.id}")
+        # Actualizar último login
+        user.last_login = datetime.now(timezone.utc)
+        db.session.commit()
+
+        # Generar tokens
         access_token = create_access_token(identity=user.id)
-        print(f"Token generado: {access_token[:10]}...")
+        refresh_token = create_refresh_token(identity=user.id)
 
-        return jsonify({
-            "success": True,
-            "message": "Inicio de sesión exitoso",
-            "data": {
+        logger.info(f"Login exitoso: {email}")
+
+        return standardize_response(
+            True,
+            "Inicio de sesión exitoso",
+            {
                 "access_token": access_token,
-                "user": {
-                    "id": user.id,
-                    "email": user.email,
-                    "full_name": user.full_name,
-                    "postal_code": user.postal_code
-                }
+                "refresh_token": refresh_token,
+                "user": user.to_dict()
             }
-        }), 200
+        )
     except Exception as e:
-        print(f"Error en el login: {str(e)}")
-        return jsonify({"success": False, "message": f"Error en el inicio de sesión: {str(e)}"}), 500
+        logger.error(f"Error en el login: {str(e)}", exc_info=True)
+        return standardize_response(False, "Error en el inicio de sesión", status_code=500)
 
 @auth.route('/profile', methods=['GET'])
 @jwt_required()
+@log_api_call
 def profile():
+    """Obtiene el perfil del usuario autenticado."""
     try:
         user_id = get_jwt_identity()
         user = User.query.get(user_id)
 
         if not user:
-            return jsonify({"success": False, "message": "Usuario no encontrado"}), 404
+            logger.warning(f"Usuario no encontrado: {user_id}")
+            return standardize_response(False, "Usuario no encontrado", status_code=404)
 
-        return jsonify({
-            "success": True,
-            "message": "Bienvenido a tu perfil",
-            "data": {
-                "full_name": user.full_name,
-                "email": user.email,
-                "postal_code": user.postal_code,
-                "id": user.id
-            }
-        }), 200
+        logger.info(f"Perfil obtenido: {user.email}")
+
+        return standardize_response(
+            True,
+            "Perfil obtenido correctamente",
+            user.to_dict()
+        )
     except Exception as e:
-        return jsonify({"success": False, "message": f"Error al obtener perfil: {str(e)}"}), 500
+        logger.error(f"Error al obtener perfil: {str(e)}", exc_info=True)
+        return standardize_response(False, "Error al obtener perfil", status_code=500)
+
+@auth.route('/refresh', methods=['POST'])
+@jwt_required(refresh=True)
+@log_api_call
+def refresh():
+    """Refresca el token de acceso usando un token de refresco."""
+    try:
+        user_id = get_jwt_identity()
+        user = User.query.get(user_id)
+
+        if not user or not user.is_active:
+            logger.warning(f"Usuario inactivo o no encontrado: {user_id}")
+            return standardize_response(False, "Usuario no encontrado o inactivo", status_code=401)
+
+        # Generar nuevo token de acceso
+        access_token = create_access_token(identity=user_id)
+
+        logger.info(f"Token refrescado para usuario: {user.email}")
+
+        return standardize_response(
+            True,
+            "Token refrescado correctamente",
+            {"access_token": access_token}
+        )
+    except Exception as e:
+        logger.error(f"Error al refrescar token: {str(e)}", exc_info=True)
+        return standardize_response(False, "Error al refrescar token", status_code=500)
 
 @auth.route('/logout', methods=['POST'])
 @jwt_required()
+@log_api_call
 def logout():
+    """Cierra la sesión del usuario."""
     try:
         # En una implementación real, aquí podrías añadir el token a una lista negra
         # para invalidarlo antes de su expiración
-        return jsonify({
-            "success": True,
-            "message": "Sesión cerrada correctamente",
-            "data": None
-        }), 200
+        return standardize_response(True, "Sesión cerrada correctamente")
     except Exception as e:
-        return jsonify({"success": False, "message": f"Error al cerrar sesión: {str(e)}"}), 500
+        logger.error(f"Error al cerrar sesión: {str(e)}", exc_info=True)
+        return standardize_response(False, "Error al cerrar sesión", status_code=500)
