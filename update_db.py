@@ -1,41 +1,26 @@
-from app import create_app, db
-from app.models.contacto import Contacto
-from app.models.user import User
-from app.models.curso import Curso
-import sqlite3
-import os
+"""
+Script simple para actualizar la base de datos.
+Ajusta las importaciones según la estructura de tu proyecto.
+"""
 
-app = create_app()
-
-def update_contacto_table():
-    """
-    Actualiza la tabla de contactos para agregar los campos telefono y curso
-    """
+# Ajusta estas importaciones según la estructura de tu proyecto
+try:
+    from run import app
+    from models import db
+    
+    print("Importaciones exitosas.")
+    
     with app.app_context():
-        # Verificar si la tabla ya tiene las columnas
-        conn = sqlite3.connect('instance/akademiakupula.db')
-        cursor = conn.cursor()
+        db.create_all()
+        print("Base de datos actualizada con éxito.")
+        print("Se han creado las tablas si no existían previamente.")
         
-        # Verificar si la columna telefono existe
-        cursor.execute("PRAGMA table_info(contactos)")
-        columns = [column[1] for column in cursor.fetchall()]
-        
-        if 'telefono' not in columns:
-            print("Agregando columna 'telefono' a la tabla contactos...")
-            cursor.execute("ALTER TABLE contactos ADD COLUMN telefono TEXT")
-        else:
-            print("La columna 'telefono' ya existe en la tabla contactos")
-            
-        if 'curso' not in columns:
-            print("Agregando columna 'curso' a la tabla contactos...")
-            cursor.execute("ALTER TABLE contactos ADD COLUMN curso TEXT")
-        else:
-            print("La columna 'curso' ya existe en la tabla contactos")
-            
-        conn.commit()
-        conn.close()
-        
-        print("Actualización de la base de datos completada")
-
-if __name__ == '__main__':
-    update_contacto_table()
+except ImportError as e:
+    print(f"Error de importación: {e}")
+    print("\nAjusta las importaciones según la estructura de tu proyecto.")
+    print("Por ejemplo, si tu aplicación está en un paquete 'app':")
+    print("from app import app")
+    print("from app.models import db")
+    
+except Exception as e:
+    print(f"Error al actualizar la base de datos: {e}")
