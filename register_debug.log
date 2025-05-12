@@ -1,0 +1,9 @@
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'maria garcia', 'postal_code': '48007', 'email': 'mariagarcia@gmail.com', 'password': '11111111Mg'}
+Verificando si el email ya está registrado: mariagarcia@gmail.com
+Creando nuevo usuario: maria garcia, mariagarcia@gmail.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 7
