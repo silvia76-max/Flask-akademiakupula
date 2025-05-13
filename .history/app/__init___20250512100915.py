@@ -75,24 +75,6 @@ def create_app():
     logger.info("Bcrypt initialized")
 
     jwt.init_app(app)
-
-    # Configurar JWT para convertir el ID a string
-    @jwt.user_identity_loader
-    def user_identity_lookup(user_id):
-        # Convertir el ID a string para evitar el error "Subject must be a string"
-        return str(user_id)
-
-    # Configurar JWT para cargar el usuario desde la base de datos
-    @jwt.user_lookup_loader
-    def user_lookup_callback(_jwt_header, jwt_data):
-        # Obtener el ID del usuario desde el token
-        identity = jwt_data["sub"]
-        # Convertir a entero si es necesario
-        user_id = int(identity) if isinstance(identity, str) else identity
-        # Buscar el usuario en la base de datos
-        from app.models.user import User
-        return User.query.filter_by(id=user_id).one_or_none()
-
     logger.info("JWT initialized")
 
     # Database migrations
@@ -154,28 +136,12 @@ def create_app():
     from app.routes.test_routes import test_bp
     from app.routes.contacto_routes import contacto_bp
     from app.routes.user_courses import user_courses_bp
-    from app.routes.admin_routes import admin_bp
-    from app.routes.content_routes import content_bp
-
-    # Intentar importar rutas de pago si existen
-    try:
-        from app.routes.payment_routes import payment_bp
-        has_payment_routes = True
-    except ImportError:
-        has_payment_routes = False
-        logger.warning("No se pudieron importar las rutas de pago")
 
     app.register_blueprint(auth, url_prefix='/api/auth')
     app.register_blueprint(cursos_bp, url_prefix='/api/cursos')
     app.register_blueprint(test_bp, url_prefix='/api/test')
     app.register_blueprint(contacto_bp, url_prefix='/api/contacto')
     app.register_blueprint(user_courses_bp, url_prefix='/api/user')
-    app.register_blueprint(admin_bp, url_prefix='/api/admin')
-    app.register_blueprint(content_bp, url_prefix='/api/content')
-
-    # Registrar rutas de pago si existen
-    if has_payment_routes:
-        app.register_blueprint(payment_bp, url_prefix='/api/payment')
 
     # Set up error handlers
     logger.info("Setting up error handlers")
