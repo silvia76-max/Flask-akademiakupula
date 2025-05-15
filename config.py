@@ -5,12 +5,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-<<<<<<< HEAD
-    """Configuración base para la aplicación Flask."""
-    
-    # Configuración de la base de datos
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///app.db'
-=======
     # Entorno
     ENV = os.getenv('FLASK_ENV', 'development')
     DEBUG = os.getenv('FLASK_DEBUG', 'True') == 'True'
@@ -21,7 +15,6 @@ class Config:
     # Asegurarse de que la URL no contenga caracteres de escape
     if isinstance(SQLALCHEMY_DATABASE_URI, str) and '\\x3a' in SQLALCHEMY_DATABASE_URI:
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('\\x3a', ':')
->>>>>>> 5a83f1a8f75ccfaa070201e9645e82a9412c3e61
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Configuración de JWT
