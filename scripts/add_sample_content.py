@@ -1,3 +1,7 @@
+"""
+Script para añadir contenido de ejemplo a la base de datos.
+"""
+
 import os
 import sys
 from datetime import datetime, timezone
@@ -10,12 +14,15 @@ def add_sample_content():
     """
     try:
         # Añadir el directorio del proyecto al path
-        flask_dir = r"c:\users\betty\flask-akademiaKupula"
-        sys.path.insert(0, flask_dir)
+        project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        sys.path.insert(0, project_dir)
         
         # Importar las dependencias necesarias
-        from app import app, db
-        from app.models.content_models import Content
+        from app import create_app
+        from app import db
+        from app.models.content import Content
+        
+        app = create_app()
         
         # Definir contenido de ejemplo
         sample_contents = [

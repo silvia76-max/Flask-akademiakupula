@@ -13,7 +13,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler('update_db.log')
+        logging.FileHandler('scripts/update_db.log')
     ]
 )
 
@@ -23,8 +23,12 @@ def main():
     try:
         logger.info("Iniciando actualización de la base de datos")
 
+        # Añadir el directorio del proyecto al path
+        project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        sys.path.insert(0, project_dir)
+
         # Conectar a la base de datos
-        db_path = 'instance/akademiakupula.db'
+        db_path = 'instance/app.db'
 
         if not os.path.exists(db_path):
             logger.error(f"La base de datos no existe en la ruta: {db_path}")

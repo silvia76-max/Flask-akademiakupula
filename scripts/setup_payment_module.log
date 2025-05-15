@@ -1,0 +1,37 @@
+2025-05-15 22:50:36,652 - __main__ - INFO - Iniciando configuración del módulo de pagos
+2025-05-15 22:50:49,273 - __main__ - ERROR - Error durante la configuración: module 'stripe' has no attribute '__version__'
+Traceback (most recent call last):
+  File "C:\Users\betty\Flask-akademiaKupula\scripts\setup_payment_module.py", line 46, in main
+    logger.info(f"Stripe instalado correctamente: versión {stripe.__version__}")
+                                                           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\betty\Flask-akademiaKupula\venv\Lib\site-packages\stripe\__init__.py", line 241, in __getattr__
+    raise AttributeError(
+        f"module {__name__!r} has no attribute {name!r}"
+    )
+AttributeError: module 'stripe' has no attribute '__version__'. Did you mean: '_version'?
+2025-05-15 22:51:33,881 - __main__ - INFO - Iniciando configuración del módulo de pagos
+2025-05-15 22:51:39,893 - __main__ - INFO - Stripe instalado correctamente
+2025-05-15 22:51:39,894 - __main__ - INFO - Creando tablas en la base de datos...
+2025-05-15 22:51:44,862 - app - INFO - Creating Flask application
+2025-05-15 22:51:44,866 - app - INFO - Loading application configuration
+2025-05-15 22:51:44,883 - app - INFO - Environment: development
+2025-05-15 22:51:44,893 - app - INFO - Debug mode: True
+2025-05-15 22:51:44,896 - app - INFO - Database URI: sqlite:///akademiakupula.db = 'sqlite:///akademiakupula.db'
+2025-05-15 22:51:44,897 - app - INFO - Configuring CORS
+2025-05-15 22:51:44,898 - app - INFO - Initializing extensions
+2025-05-15 22:51:45,797 - app - INFO - SQLAlchemy initialized
+2025-05-15 22:51:45,810 - app - INFO - Bcrypt initialized
+2025-05-15 22:51:45,811 - app - INFO - JWT initialized
+2025-05-15 22:51:45,816 - app - INFO - Migrate initialized
+2025-05-15 22:51:45,826 - app - INFO - Mail initialized
+2025-05-15 22:51:45,826 - app - INFO - Compress initialized
+2025-05-15 22:51:45,839 - app - INFO - Cache initialized
+2025-05-15 22:51:45,930 - app - INFO - Rate limiter initialized
+2025-05-15 22:51:45,939 - app - INFO - Creating database tables if they don't exist
+2025-05-15 22:51:45,947 - app - INFO - Database tables created successfully
+2025-05-15 22:51:45,963 - app - INFO - Registering models
+2025-05-15 22:51:46,092 - app - INFO - Registering blueprints
+2025-05-15 22:51:46,345 - app - INFO - Setting up error handlers
+2025-05-15 22:51:46,363 - app - INFO - Flask application created successfully
+2025-05-15 22:51:46,448 - __main__ - INFO - Tablas creadas correctamente.
+2025-05-15 22:51:47,600 - __main__ - INFO - Configuración del módulo de pagos completada con éxito.

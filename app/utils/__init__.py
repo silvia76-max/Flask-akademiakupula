@@ -10,6 +10,13 @@ import re
 # Configurar logger
 logger = logging.getLogger(__name__)
 
+# Importar funciones de correo electrónico
+from app.utils.email_utils import (
+    send_verification_email,
+    send_password_reset_email,
+    send_welcome_email
+)
+
 def standardize_response(success, message, data=None, status_code=200):
     """
     Estandariza las respuestas de la API.
