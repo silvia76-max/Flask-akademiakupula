@@ -156,6 +156,7 @@ def create_app():
     from app.routes.user_courses import user_courses_bp
     from app.routes.admin_routes import admin_bp
     from app.routes.content_routes import content_bp
+    from app.routes.session_routes import sessions_bp
 
     # Intentar importar rutas de pago si existen
     try:
@@ -172,6 +173,7 @@ def create_app():
     app.register_blueprint(user_courses_bp, url_prefix='/api/user')
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
     app.register_blueprint(content_bp, url_prefix='/api/content')
+    app.register_blueprint(sessions_bp, url_prefix='/api/sessions')
 
     # Registrar rutas de pago si existen
     if has_payment_routes:

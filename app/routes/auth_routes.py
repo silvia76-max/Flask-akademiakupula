@@ -3,7 +3,7 @@ Rutas de autenticación para la API.
 Este módulo contiene las rutas para registro, login, perfil y otras funcionalidades relacionadas con la autenticación.
 """
 
-from flask import Blueprint, request, current_app
+from flask import Blueprint, request, current_app, jsonify, g
 from app.models.user import User
 from app import db, mail, cache, limiter
 from flask_mail import Message
@@ -15,6 +15,9 @@ from flask_jwt_extended import (
 import logging
 from datetime import datetime, timezone
 from app.utils import validate_email, validate_required_fields, standardize_response, log_api_call
+from app.models.session import Session
+import os
+import jwt
 
 # Configurar logger
 logger = logging.getLogger(__name__)
@@ -279,11 +282,33 @@ def login():
 
         # Actualizar último login
         user.last_login = datetime.now(timezone.utc)
-        db.session.commit()
 
         # Generar tokens
         access_token = create_access_token(identity=user.id)
         refresh_token = create_refresh_token(identity=user.id)
+
+        # Registrar la sesión
+        ip_address = request.remote_addr
+        user_agent = request.headers.get('User-Agent')
+
+        try:
+            # Crear nueva sesión
+            new_session = Session(
+                user_id=user.id,
+                token=access_token,
+                ip_address=ip_address,
+                user_agent=user_agent
+            )
+
+            db.session.add(new_session)
+            db.session.commit()
+
+            logger.info(f"Sesión creada para usuario {user.id}: {new_session.id}")
+        except Exception as e:
+            logger.error(f"Error al crear sesión: {str(e)}", exc_info=True)
+            # Continuamos aunque falle la creación de la sesión
+            db.session.rollback()
+            db.session.commit()  # Commit para guardar al menos el último login
 
         logger.info(f"Login exitoso: {email}")
 
@@ -299,6 +324,39 @@ def login():
     except Exception as e:
         logger.error(f"Error en el login: {str(e)}", exc_info=True)
         return standardize_response(False, "Error en el inicio de sesión", status_code=500)
+
+
+
+
+
+@auth.route('/logout', methods=['POST'])
+@jwt_required()
+@log_api_call
+def logout():
+    """Cierra la sesión actual del usuario"""
+    try:
+        # Obtener el token del encabezado Authorization
+        auth_header = request.headers.get('Authorization')
+        if not auth_header or not auth_header.startswith('Bearer '):
+            return standardize_response(False, "Token no proporcionado", status_code=401)
+
+        token = auth_header.split(' ')[1]
+
+        # Buscar la sesión activa con este token
+        session = Session.query.filter_by(token=token, is_active=True).first()
+
+        if session:
+            # Finalizar la sesión
+            session.end_session()
+            db.session.commit()
+            logger.info(f"Sesión {session.id} cerrada correctamente")
+        else:
+            logger.warning(f"No se encontró una sesión activa para el token proporcionado")
+
+        return standardize_response(True, "Sesión cerrada correctamente")
+    except Exception as e:
+        logger.error(f"Error al cerrar sesión: {str(e)}", exc_info=True)
+        return standardize_response(False, f"Error al cerrar sesión: {str(e)}", status_code=500)
 
 @auth.route('/profile', methods=['GET'])
 @jwt_required()
@@ -351,15 +409,3 @@ def refresh():
         logger.error(f"Error al refrescar token: {str(e)}", exc_info=True)
         return standardize_response(False, "Error al refrescar token", status_code=500)
 
-@auth.route('/logout', methods=['POST'])
-@jwt_required()
-@log_api_call
-def logout():
-    """Cierra la sesión del usuario."""
-    try:
-        # En una implementación real, aquí podrías añadir el token a una lista negra
-        # para invalidarlo antes de su expiración
-        return standardize_response(True, "Sesión cerrada correctamente")
-    except Exception as e:
-        logger.error(f"Error al cerrar sesión: {str(e)}", exc_info=True)
-        return standardize_response(False, "Error al cerrar sesión", status_code=500)

@@ -1,0 +1,18 @@
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'manoli la gruesa', 'postal_code': '68154', 'email': 'lagruesa@gmail.com', 'password': '00001111Mg'}
+Verificando si el email ya está registrado: lagruesa@gmail.com
+Creando nuevo usuario: manoli la gruesa, lagruesa@gmail.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 9
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'Usuario Prueba', 'email': 'usuario_prueba@example.com', 'password': 'password123', 'postal_code': '12345'}
+Verificando si el email ya está registrado: usuario_prueba@example.com
+Creando nuevo usuario: Usuario Prueba, usuario_prueba@example.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 10

@@ -1,0 +1,87 @@
+2025-05-16 20:32:26,915 - __main__ - INFO - Iniciando creación de la tabla de sesiones
+2025-05-16 20:32:33,195 - app - INFO - Creating Flask application
+2025-05-16 20:32:33,199 - app - INFO - Loading application configuration
+2025-05-16 20:32:33,204 - app - INFO - Environment: development
+2025-05-16 20:32:33,204 - app - INFO - Debug mode: True
+2025-05-16 20:32:33,205 - app - INFO - Database URI: sqlite:///akademiakupula.db = 'sqlite:///akademiakupula.db'
+2025-05-16 20:32:33,205 - app - INFO - Configuring CORS
+2025-05-16 20:32:33,206 - app - INFO - Initializing extensions
+2025-05-16 20:32:33,305 - app - INFO - SQLAlchemy initialized
+2025-05-16 20:32:33,313 - app - INFO - Bcrypt initialized
+2025-05-16 20:32:33,314 - app - INFO - JWT initialized
+2025-05-16 20:32:33,320 - app - INFO - Migrate initialized
+2025-05-16 20:32:33,321 - app - INFO - Mail initialized
+2025-05-16 20:32:33,322 - app - INFO - Compress initialized
+2025-05-16 20:32:33,338 - app - INFO - Cache initialized
+2025-05-16 20:32:33,372 - app - INFO - Rate limiter initialized
+2025-05-16 20:32:33,373 - app - INFO - Creating database tables if they don't exist
+2025-05-16 20:32:33,383 - app - ERROR - Error creating database tables: Foreign key associated with column 'sessions.user_id' could not find table 'users' with which to generate a foreign key to target column 'id'
+2025-05-16 20:32:33,384 - app - INFO - Registering models
+2025-05-16 20:32:33,476 - app - INFO - Registering blueprints
+2025-05-16 20:32:38,468 - __main__ - ERROR - Error durante la creación de la tabla: View function mapping is overwriting an existing endpoint function: auth.logout
+Traceback (most recent call last):
+  File "C:\Users\betty\Flask-akademiaKupula\scripts\create_sessions_table.py", line 33, in main
+    app = create_app()
+  File "C:\Users\betty\Flask-akademiaKupula\app\__init__.py", line 169, in create_app
+    app.register_blueprint(auth, url_prefix='/api/auth')
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\betty\Flask-akademiaKupula\venv\Lib\site-packages\flask\sansio\scaffold.py", line 47, in wrapper_func
+    return f(self, *args, **kwargs)
+  File "C:\Users\betty\Flask-akademiaKupula\venv\Lib\site-packages\flask\sansio\app.py", line 595, in register_blueprint
+    blueprint.register(self, options)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\betty\Flask-akademiaKupula\venv\Lib\site-packages\flask\sansio\blueprints.py", line 335, in register
+    deferred(state)
+    ~~~~~~~~^^^^^^^
+  File "C:\Users\betty\Flask-akademiaKupula\venv\Lib\site-packages\flask\sansio\blueprints.py", line 434, in <lambda>
+    lambda s: s.add_url_rule(
+              ~~~~~~~~~~~~~~^
+        rule,
+        ^^^^^
+    ...<3 lines>...
+        **options,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\betty\Flask-akademiaKupula\venv\Lib\site-packages\flask\sansio\blueprints.py", line 110, in add_url_rule
+    self.app.add_url_rule(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        rule,
+        ^^^^^
+    ...<3 lines>...
+        **options,
+        ^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\betty\Flask-akademiaKupula\venv\Lib\site-packages\flask\sansio\scaffold.py", line 47, in wrapper_func
+    return f(self, *args, **kwargs)
+  File "C:\Users\betty\Flask-akademiaKupula\venv\Lib\site-packages\flask\sansio\app.py", line 657, in add_url_rule
+    raise AssertionError(
+    ...<2 lines>...
+    )
+AssertionError: View function mapping is overwriting an existing endpoint function: auth.logout
+2025-05-16 20:33:40,646 - __main__ - INFO - Iniciando creación de la tabla de sesiones
+2025-05-16 20:33:44,987 - app - INFO - Creating Flask application
+2025-05-16 20:33:45,001 - app - INFO - Loading application configuration
+2025-05-16 20:33:45,033 - app - INFO - Environment: development
+2025-05-16 20:33:45,327 - app - INFO - Debug mode: True
+2025-05-16 20:33:45,384 - app - INFO - Database URI: sqlite:///akademiakupula.db = 'sqlite:///akademiakupula.db'
+2025-05-16 20:33:45,670 - app - INFO - Configuring CORS
+2025-05-16 20:33:45,927 - app - INFO - Initializing extensions
+2025-05-16 20:33:46,335 - app - INFO - SQLAlchemy initialized
+2025-05-16 20:33:46,336 - app - INFO - Bcrypt initialized
+2025-05-16 20:33:46,337 - app - INFO - JWT initialized
+2025-05-16 20:33:46,346 - app - INFO - Migrate initialized
+2025-05-16 20:33:46,349 - app - INFO - Mail initialized
+2025-05-16 20:33:46,351 - app - INFO - Compress initialized
+2025-05-16 20:33:46,360 - app - INFO - Cache initialized
+2025-05-16 20:33:46,597 - app - INFO - Rate limiter initialized
+2025-05-16 20:33:46,598 - app - INFO - Creating database tables if they don't exist
+2025-05-16 20:33:46,602 - app - ERROR - Error creating database tables: Foreign key associated with column 'sessions.user_id' could not find table 'users' with which to generate a foreign key to target column 'id'
+2025-05-16 20:33:46,603 - app - INFO - Registering models
+2025-05-16 20:33:46,800 - app - INFO - Registering blueprints
+2025-05-16 20:33:50,633 - app - INFO - Setting up error handlers
+2025-05-16 20:33:50,633 - app - INFO - Flask application created successfully
+2025-05-16 20:33:50,667 - __main__ - INFO - Tabla 'sessions' creada correctamente
+2025-05-16 20:33:50,671 - __main__ - ERROR - Error: La tabla 'sessions' no se ha creado correctamente
+2025-05-16 20:33:50,672 - __main__ - INFO - Proceso completado
