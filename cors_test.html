@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de CORS - Akademia Kupula</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prueba de CORS - Akademia Kupula</h1>
+
+    <div>
+        <h2>Configuración</h2>
+        <div>
+            <label for="apiUrl">URL de la API:</label>
+            <input type="text" id="apiUrl" value="http://localhost:5000" style="width: 300px;">
+            <p><small>Asegúrate de que esta URL coincida con la URL de tu backend Flask.</small></p>
+        </div>
+    </div>
+
+    <div>
+        <h2>Pruebas</h2>
+        <button onclick="testPing()">Probar /api/test/ping</button>
+        <button onclick="testCors()">Probar /api/test/cors-test</button>
+        <button onclick="testCursos()">Probar /api/cursos</button>
+    </div>
+
+    <div>
+        <h2>Resultado</h2>
+        <pre id="result">Haz clic en un botón para probar la conexión...</pre>
+    </div>
+
+    <script>
+        // Función para mostrar el resultado
+        function showResult(data, error = false) {
+            const resultElement = document.getElementById('result');
+            if (error) {
+                resultElement.innerHTML = `<span class="error">ERROR:</span>\n${JSON.stringify(data, null, 2)}`;
+            } else {
+                resultElement.innerHTML = `<span class="success">ÉXITO:</span>\n${JSON.stringify(data, null, 2)}`;
+            }
+        }
+
+        // Función para obtener la URL base de la API
+        function getApiUrl() {
+            return document.getElementById('apiUrl').value.trim();
+        }
+
+        // Función para realizar una solicitud a la API
+        async function fetchApi(endpoint, options = {}) {
+            const apiUrl = getApiUrl();
+            try {
+                const response = await fetch(`${apiUrl}${endpoint}`, {
+                    ...options,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    }
+                    // No usar credentials con CORS '*'
+                    // credentials: 'include'
+                });
+
+                const data = await response.json();
+                return { response, data };
+            } catch (error) {
+                console.error('Error al realizar la solicitud:', error);
+                return { error };
+            }
+        }
+
+        // Función para probar el endpoint /api/test/ping
+        async function testPing() {
+            try {
+                const { response, data, error } = await fetchApi('/api/test/ping');
+
+                if (error) {
+                    showResult({ message: 'Error de conexión', details: error.toString() }, true);
+                    return;
+                }
+
+                showResult({
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: Object.fromEntries(response.headers.entries()),
+                    data
+                });
+            } catch (error) {
+                showResult({ message: 'Error inesperado', details: error.toString() }, true);
+            }
+        }
+
+        // Función para probar el endpoint /api/test/cors-test
+        async function testCors() {
+            try {
+                const { response, data, error } = await fetchApi('/api/test/cors-test');
+
+                if (error) {
+                    showResult({ message: 'Error de conexión', details: error.toString() }, true);
+                    return;
+                }
+
+                showResult({
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: Object.fromEntries(response.headers.entries()),
+                    data
+                });
+            } catch (error) {
+                showResult({ message: 'Error inesperado', details: error.toString() }, true);
+            }
+        }
+
+        // Función para probar el endpoint /api/cursos
+        async function testCursos() {
+            try {
+                const { response, data, error } = await fetchApi('/api/cursos/');
+
+                if (error) {
+                    showResult({ message: 'Error de conexión', details: error.toString() }, true);
+                    return;
+                }
+
+                showResult({
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: Object.fromEntries(response.headers.entries()),
+                    data
+                });
+            } catch (error) {
+                showResult({ message: 'Error inesperado', details: error.toString() }, true);
+            }
+        }
+    </script>
+</body>
+</html>

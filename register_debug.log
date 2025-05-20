@@ -79,3 +79,30 @@ Usuario instanciado correctamente
 Contraseña establecida correctamente
 Usuario añadido a la sesión
 Usuario creado con ID: 17
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'tania calvo', 'postal_code': '48006', 'email': 'taniacalvo@gmail.com', 'password': '123456Akademia'}
+Verificando si el email ya está registrado: taniacalvo@gmail.com
+Creando nuevo usuario: tania calvo, taniacalvo@gmail.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 18
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'susana ruiz', 'postal_code': '48001', 'email': 'susanaruiz@gmail.com', 'password': '987123000'}
+Verificando si el email ya está registrado: susanaruiz@gmail.com
+Creando nuevo usuario: susana ruiz, susanaruiz@gmail.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 19
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'carolina gomez', 'postal_code': '48012', 'email': 'carolina@gmail.com', 'password': '222222000000'}
+Verificando si el email ya está registrado: carolina@gmail.com
+Creando nuevo usuario: carolina gomez, carolina@gmail.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 20

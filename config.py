@@ -7,7 +7,7 @@ load_dotenv()
 
 class Config:
     """Configuración base para la aplicación Flask."""
-    
+
     # Entorno
     ENV = os.getenv('FLASK_ENV', 'development')
     DEBUG = os.getenv('FLASK_DEBUG', 'True') == 'True'
@@ -23,7 +23,7 @@ class Config:
         'pool_recycle': 280,
         'pool_pre_ping': True,
     }
-    
+
     # Seguridad
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'dev-jwt-secret-key-change-in-production')
@@ -53,6 +53,12 @@ class Config:
     CORS_ORIGINS = [
         'http://localhost:5173',
         'http://127.0.0.1:5173',
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'http://localhost:5174',
+        'http://127.0.0.1:5174',
+        'http://localhost',
+        'http://127.0.0.1',
         os.getenv('FRONTEND_URL', '')
     ]
 
@@ -69,7 +75,7 @@ class Config:
     COMPRESS_MIMETYPES = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
     COMPRESS_LEVEL = 6
     COMPRESS_MIN_SIZE = 500
-    
+
     # Configuración de uploads
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'uploads')
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16 MB

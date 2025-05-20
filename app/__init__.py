@@ -57,9 +57,11 @@ def create_app():
     CORS(app, resources={
         r"/api/*": {
             "origins": app.config.get('CORS_ORIGINS'),
-            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-            "allow_headers": ["Content-Type", "Authorization"],
-            "supports_credentials": True
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+            "allow_headers": ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin"],
+            "expose_headers": ["Content-Length", "X-Process-Time"],
+            "supports_credentials": True,
+            "max_age": 86400  # 24 horas
         }
     })
 
@@ -129,7 +131,7 @@ def create_app():
         request.start_time = time.time()
 
     @app.after_request
-    def after_request(response):
+    def add_headers(response):
         # Add processing time header
         if hasattr(request, 'start_time'):
             process_time = time.time() - request.start_time
@@ -137,7 +139,7 @@ def create_app():
 
         # Add security headers
         response.headers['X-Content-Type-Options'] = 'nosniff'
-        response.headers['X-Frame-Options'] = 'DENY'
+        response.headers['X-Frame-Options'] = 'SAMEORIGIN'  # Cambiado de DENY a SAMEORIGIN para permitir iframes desde el mismo origen
         response.headers['X-XSS-Protection'] = '1; mode=block'
 
         return response
