@@ -12,7 +12,6 @@ def register_models():
     from .cart import Cart
     from .order import Order, OrderItem
     from .session import Session
-    from .content import Content
 
     return {
         'User': User,
@@ -22,6 +21,5 @@ def register_models():
         'Cart': Cart,
         'Order': Order,
         'OrderItem': OrderItem,
-        'Session': Session,
-        'Content': Content
+        'Session': Session
     }
