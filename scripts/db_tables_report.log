@@ -1,0 +1,749 @@
+2025-05-22 18:04:25,866 - __main__ - INFO - Conectando a la base de datos: instance/akademiaKupula.db
+2025-05-22 18:04:25,869 - __main__ - INFO - Tablas encontradas: 11
+2025-05-22 18:04:25,870 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:25,871 - __main__ - INFO - TABLA: cart
+2025-05-22 18:04:25,871 - __main__ - INFO - ==================================================
+2025-05-22 18:04:25,876 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:25,879 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY
+2025-05-22 18:04:25,880 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:04:25,890 - __main__ - INFO -   - curso_id (INTEGER) NOT NULL
+2025-05-22 18:04:25,902 - __main__ - INFO -   - created_at (TIMESTAMP)
+2025-05-22 18:04:25,903 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:04:25,904 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:25,904 - __main__ - INFO - TABLA: contactos
+2025-05-22 18:04:25,912 - __main__ - INFO - ==================================================
+2025-05-22 18:04:25,918 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:25,920 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:04:25,920 - __main__ - INFO -   - nombre (VARCHAR(80)) NOT NULL
+2025-05-22 18:04:25,921 - __main__ - INFO -   - email (VARCHAR(120)) NOT NULL
+2025-05-22 18:04:25,921 - __main__ - INFO -   - telefono (VARCHAR(20))
+2025-05-22 18:04:25,933 - __main__ - INFO -   - curso (VARCHAR(50))
+2025-05-22 18:04:25,934 - __main__ - INFO -   - mensaje (TEXT) NOT NULL
+2025-05-22 18:04:25,937 - __main__ - INFO -   - fecha_creacion (DATETIME)
+2025-05-22 18:04:25,945 - __main__ - INFO -   - estado (TEXT)
+2025-05-22 18:04:25,948 - __main__ - INFO -   - fecha_actualizacion (TIMESTAMP)
+2025-05-22 18:04:25,950 - __main__ - INFO - Número de registros: 13
+2025-05-22 18:04:25,951 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:04:25,951 - __main__ - INFO -   Registro 1:
+2025-05-22 18:04:25,961 - __main__ - INFO -     id: 1
+2025-05-22 18:04:26,000 - __main__ - INFO -     nombre: paquita salas
+2025-05-22 18:04:26,021 - __main__ - INFO -     email: paqitasalas@gmail.com
+2025-05-22 18:04:26,023 - __main__ - INFO -     telefono: None
+2025-05-22 18:04:26,027 - __main__ - INFO -     curso: None
+2025-05-22 18:04:26,043 - __main__ - INFO -     mensaje: me gustaria saber el horario
+2025-05-22 18:04:26,056 - __main__ - INFO -     fecha_creacion: 2025-05-09 15:04:43
+2025-05-22 18:04:26,057 - __main__ - INFO -     estado: nuevo
+2025-05-22 18:04:26,061 - __main__ - INFO -     fecha_actualizacion: 2025-05-11T21:56:09.642379
+2025-05-22 18:04:26,086 - __main__ - INFO -   Registro 2:
+2025-05-22 18:04:26,354 - __main__ - INFO -     id: 2
+2025-05-22 18:04:26,850 - __main__ - INFO -     nombre: Contacto de Prueba
+2025-05-22 18:04:26,851 - __main__ - INFO -     email: test@example.com
+2025-05-22 18:04:26,851 - __main__ - INFO -     telefono: 612345678
+2025-05-22 18:04:26,852 - __main__ - INFO -     curso: maquillaje
+2025-05-22 18:04:26,853 - __main__ - INFO -     mensaje: Mensaje de prueba
+2025-05-22 18:04:26,853 - __main__ - INFO -     fecha_creacion: 2025-05-09 15:29:24
+2025-05-22 18:04:26,863 - __main__ - INFO -     estado: nuevo
+2025-05-22 18:04:26,864 - __main__ - INFO -     fecha_actualizacion: 2025-05-11T21:56:09.642379
+2025-05-22 18:04:26,865 - __main__ - INFO -   Registro 3:
+2025-05-22 18:04:26,865 - __main__ - INFO -     id: 3
+2025-05-22 18:04:26,866 - __main__ - INFO -     nombre: Usuario Test
+2025-05-22 18:04:26,866 - __main__ - INFO -     email: test@example.com
+2025-05-22 18:04:26,867 - __main__ - INFO -     telefono: None
+2025-05-22 18:04:26,867 - __main__ - INFO -     curso: None
+2025-05-22 18:04:26,871 - __main__ - INFO -     mensaje: Mensaje de prueba desde TestForm
+2025-05-22 18:04:26,886 - __main__ - INFO -     fecha_creacion: 2025-05-09 15:32:50
+2025-05-22 18:04:26,887 - __main__ - INFO -     estado: nuevo
+2025-05-22 18:04:26,887 - __main__ - INFO -     fecha_actualizacion: 2025-05-11T21:56:09.642379
+2025-05-22 18:04:26,888 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:26,901 - __main__ - INFO - TABLA: content
+2025-05-22 18:04:26,901 - __main__ - INFO - ==================================================
+2025-05-22 18:04:26,902 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:26,903 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:04:26,903 - __main__ - INFO -   - title (VARCHAR(200)) NOT NULL
+2025-05-22 18:04:26,904 - __main__ - INFO -   - slug (VARCHAR(200)) NOT NULL
+2025-05-22 18:04:26,904 - __main__ - INFO -   - content (TEXT) NOT NULL
+2025-05-22 18:04:26,948 - __main__ - INFO -   - summary (VARCHAR(500))
+2025-05-22 18:04:26,949 - __main__ - INFO -   - image_url (VARCHAR(255))
+2025-05-22 18:04:26,949 - __main__ - INFO -   - published (BOOLEAN)
+2025-05-22 18:04:26,950 - __main__ - INFO -   - featured (BOOLEAN)
+2025-05-22 18:04:26,951 - __main__ - INFO -   - content_type (VARCHAR(50))
+2025-05-22 18:04:26,951 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:04:26,952 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:04:26,952 - __main__ - INFO -   - author_id (INTEGER)
+2025-05-22 18:04:26,965 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:04:26,967 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:26,968 - __main__ - INFO - TABLA: cursos
+2025-05-22 18:04:26,968 - __main__ - INFO - ==================================================
+2025-05-22 18:04:26,969 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:27,000 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:04:27,001 - __main__ - INFO -   - titulo (VARCHAR(100)) NOT NULL
+2025-05-22 18:04:27,002 - __main__ - INFO -   - descripcion (TEXT) NOT NULL
+2025-05-22 18:04:27,003 - __main__ - INFO -   - duracion (VARCHAR(50))
+2025-05-22 18:04:27,003 - __main__ - INFO -   - precio (FLOAT)
+2025-05-22 18:04:27,014 - __main__ - INFO -   - imagen_url (TEXT)
+2025-05-22 18:04:27,015 - __main__ - INFO -   - nivel (TEXT)
+2025-05-22 18:04:27,016 - __main__ - INFO -   - instructor (TEXT)
+2025-05-22 18:04:27,016 - __main__ - INFO -   - destacado (BOOLEAN)
+2025-05-22 18:04:27,017 - __main__ - INFO -   - activo (BOOLEAN)
+2025-05-22 18:04:27,017 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:04:27,018 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:04:27,019 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:04:27,030 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:27,031 - __main__ - INFO - TABLA: order_items
+2025-05-22 18:04:27,031 - __main__ - INFO - ==================================================
+2025-05-22 18:04:27,032 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:27,033 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:04:27,034 - __main__ - INFO -   - order_id (INTEGER) NOT NULL
+2025-05-22 18:04:27,038 - __main__ - INFO -   - curso_id (INTEGER) NOT NULL
+2025-05-22 18:04:27,049 - __main__ - INFO -   - quantity (INTEGER)
+2025-05-22 18:04:27,049 - __main__ - INFO -   - price (FLOAT) NOT NULL
+2025-05-22 18:04:27,050 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:04:27,051 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:27,051 - __main__ - INFO - TABLA: orders
+2025-05-22 18:04:27,052 - __main__ - INFO - ==================================================
+2025-05-22 18:04:27,053 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:27,066 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:04:27,067 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:04:27,068 - __main__ - INFO -   - total_amount (FLOAT) NOT NULL
+2025-05-22 18:04:27,069 - __main__ - INFO -   - status (VARCHAR(50))
+2025-05-22 18:04:27,069 - __main__ - INFO -   - payment_method (VARCHAR(50))
+2025-05-22 18:04:27,069 - __main__ - INFO -   - payment_id (VARCHAR(255))
+2025-05-22 18:04:27,070 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:04:27,081 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:04:27,082 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:04:27,083 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:27,084 - __main__ - INFO - TABLA: sessions
+2025-05-22 18:04:27,084 - __main__ - INFO - ==================================================
+2025-05-22 18:04:27,085 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:27,086 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:04:27,099 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:04:27,099 - __main__ - INFO -   - token (VARCHAR(255)) NOT NULL
+2025-05-22 18:04:27,100 - __main__ - INFO -   - ip_address (VARCHAR(45))
+2025-05-22 18:04:27,100 - __main__ - INFO -   - user_agent (VARCHAR(255))
+2025-05-22 18:04:27,101 - __main__ - INFO -   - device_info (VARCHAR(255))
+2025-05-22 18:04:27,101 - __main__ - INFO -   - started_at (DATETIME)
+2025-05-22 18:04:27,102 - __main__ - INFO -   - ended_at (DATETIME)
+2025-05-22 18:04:27,103 - __main__ - INFO -   - is_active (BOOLEAN)
+2025-05-22 18:04:27,115 - __main__ - INFO -   - last_activity (DATETIME)
+2025-05-22 18:04:27,116 - __main__ - INFO - Número de registros: 36
+2025-05-22 18:04:27,117 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:04:27,118 - __main__ - INFO -   Registro 1:
+2025-05-22 18:04:27,118 - __main__ - INFO -     id: 1
+2025-05-22 18:04:27,119 - __main__ - INFO -     user_id: 3
+2025-05-22 18:04:27,119 - __main__ - INFO -     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzU2NTY2NywianRpIjoiMjAxOTQ2YTEtMWIyNS00MDJlLWFhMjgtZDJlZTY2Mzc3YWMwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NDc1NjU2NjcsImNzcmYiOiJmZDY0YzkyMS00MWIyLTQ4M2MtOWNjYS0wMjdiYTk5NGE2ZjAiLCJleHAiOjE3NDc2NTIwNjd9.qnrY62ZB-yAbGoDfXSd48Rg0vrwKP28-h_ygB4fl9pY
+2025-05-22 18:04:27,133 - __main__ - INFO -     ip_address: 127.0.0.1
+2025-05-22 18:04:27,133 - __main__ - INFO -     user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+2025-05-22 18:04:27,134 - __main__ - INFO -     device_info: None
+2025-05-22 18:04:27,286 - __main__ - INFO -     started_at: 2025-05-18 10:54:27.555696
+2025-05-22 18:04:27,525 - __main__ - INFO -     ended_at: None
+2025-05-22 18:04:27,725 - __main__ - INFO -     is_active: 1
+2025-05-22 18:04:27,812 - __main__ - INFO -     last_activity: 2025-05-18 10:54:27.555750
+2025-05-22 18:04:27,818 - __main__ - INFO -   Registro 2:
+2025-05-22 18:04:27,819 - __main__ - INFO -     id: 2
+2025-05-22 18:04:27,837 - __main__ - INFO -     user_id: 3
+2025-05-22 18:04:27,948 - __main__ - INFO -     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzU2ODE1MiwianRpIjoiYjQ3ZjNhN2ItMDllMi00MDUxLTg5ODEtMjMyYzY1ZTliZmIxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NDc1NjgxNTIsImNzcmYiOiJkODQyNzkwNC1iOWY1LTQ5YWItODdlYy03MTJmNWU2YjIzZjUiLCJleHAiOjE3NDc2NTQ1NTJ9.NJKFNYA7DtiY3CRlN9ErXGAadeI-OA-RvEpyGukqOhU
+2025-05-22 18:04:28,187 - __main__ - INFO -     ip_address: 127.0.0.1
+2025-05-22 18:04:28,196 - __main__ - INFO -     user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+2025-05-22 18:04:28,198 - __main__ - INFO -     device_info: None
+2025-05-22 18:04:28,213 - __main__ - INFO -     started_at: 2025-05-18 11:35:52.966912
+2025-05-22 18:04:28,214 - __main__ - INFO -     ended_at: None
+2025-05-22 18:04:28,216 - __main__ - INFO -     is_active: 1
+2025-05-22 18:04:28,220 - __main__ - INFO -     last_activity: 2025-05-18 11:35:52.966923
+2025-05-22 18:04:28,232 - __main__ - INFO -   Registro 3:
+2025-05-22 18:04:28,234 - __main__ - INFO -     id: 3
+2025-05-22 18:04:28,237 - __main__ - INFO -     user_id: 3
+2025-05-22 18:04:28,249 - __main__ - INFO -     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzU2ODE3NywianRpIjoiODZmZjdmMDUtNDQ2YS00YzAxLWI3ODMtOGI1MTk0NGVhMjFkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NDc1NjgxNzcsImNzcmYiOiIyNGE2ZDM0OC03Y2Y4LTRkMDctODIzZC05YzhmMDM1YmM5M2IiLCJleHAiOjE3NDc2NTQ1Nzd9.qlIbnwOPglcrmzYTRvEL5LKmQ6HJBa6CMXJw2HmL7RI
+2025-05-22 18:04:28,251 - __main__ - INFO -     ip_address: 127.0.0.1
+2025-05-22 18:04:28,269 - __main__ - INFO -     user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+2025-05-22 18:04:28,315 - __main__ - INFO -     device_info: None
+2025-05-22 18:04:28,319 - __main__ - INFO -     started_at: 2025-05-18 11:36:17.556600
+2025-05-22 18:04:28,321 - __main__ - INFO -     ended_at: None
+2025-05-22 18:04:28,335 - __main__ - INFO -     is_active: 1
+2025-05-22 18:04:28,337 - __main__ - INFO -     last_activity: 2025-05-18 11:36:17.556609
+2025-05-22 18:04:28,350 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:28,352 - __main__ - INFO - TABLA: sqlite_sequence
+2025-05-22 18:04:28,354 - __main__ - INFO - ==================================================
+2025-05-22 18:04:28,368 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:28,370 - __main__ - INFO -   - name ()
+2025-05-22 18:04:28,383 - __main__ - INFO -   - seq ()
+2025-05-22 18:04:28,386 - __main__ - INFO - Número de registros: 1
+2025-05-22 18:04:28,397 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:04:28,404 - __main__ - INFO -   Registro 1:
+2025-05-22 18:04:28,416 - __main__ - INFO -     name: users
+2025-05-22 18:04:28,417 - __main__ - INFO -     seq: 20
+2025-05-22 18:04:28,417 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:28,418 - __main__ - INFO - TABLA: test_users
+2025-05-22 18:04:28,418 - __main__ - INFO - ==================================================
+2025-05-22 18:04:28,419 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:28,420 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:04:28,433 - __main__ - INFO -   - name (VARCHAR(100)) NOT NULL
+2025-05-22 18:04:28,434 - __main__ - INFO - Número de registros: 1
+2025-05-22 18:04:28,435 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:04:28,436 - __main__ - INFO -   Registro 1:
+2025-05-22 18:04:28,436 - __main__ - INFO -     id: 1
+2025-05-22 18:04:28,437 - __main__ - INFO -     name: Test User
+2025-05-22 18:04:28,438 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:28,452 - __main__ - INFO - TABLA: users
+2025-05-22 18:04:28,452 - __main__ - INFO - ==================================================
+2025-05-22 18:04:28,453 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:28,454 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY
+2025-05-22 18:04:28,454 - __main__ - INFO -   - full_name (VARCHAR(120)) NOT NULL
+2025-05-22 18:04:28,468 - __main__ - INFO -   - postal_code (VARCHAR(20)) NOT NULL
+2025-05-22 18:04:28,469 - __main__ - INFO -   - email (VARCHAR(120)) NOT NULL
+2025-05-22 18:04:28,470 - __main__ - INFO -   - password_hash (VARCHAR(128)) NOT NULL
+2025-05-22 18:04:28,470 - __main__ - INFO -   - is_confirmed (BOOLEAN)
+2025-05-22 18:04:28,471 - __main__ - INFO -   - is_active (BOOLEAN)
+2025-05-22 18:04:28,483 - __main__ - INFO -   - is_admin (BOOLEAN)
+2025-05-22 18:04:28,484 - __main__ - INFO -   - last_login (DATETIME)
+2025-05-22 18:04:28,484 - __main__ - INFO -   - failed_login_attempts (INTEGER)
+2025-05-22 18:04:28,486 - __main__ - INFO -   - locked_until (DATETIME)
+2025-05-22 18:04:28,487 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:04:28,501 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:04:28,503 - __main__ - INFO - Número de registros: 20
+2025-05-22 18:04:28,504 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:04:28,516 - __main__ - INFO -   Registro 1:
+2025-05-22 18:04:28,518 - __main__ - INFO -     id: 1
+2025-05-22 18:04:28,519 - __main__ - INFO -     full_name: Usuario de Prueba
+2025-05-22 18:04:28,520 - __main__ - INFO -     postal_code: 28001
+2025-05-22 18:04:28,520 - __main__ - INFO -     email: usuario@ejemplo.com
+2025-05-22 18:04:28,521 - __main__ - INFO -     password_hash: scrypt:32768:8:1$1nxe1oUNpAjY7u3y$776e9dd465afdbc7b5b6ce2885970d68c1d944fc645da3927f0d894d3d42b7c71ec5263c139bfabd66e2a9e16963fe3770b1e7e951f6caf4a7f80fa7cf66a6fa
+2025-05-22 18:04:28,535 - __main__ - INFO -     is_confirmed: 1
+2025-05-22 18:04:28,536 - __main__ - INFO -     is_active: 1
+2025-05-22 18:04:28,537 - __main__ - INFO -     is_admin: 0
+2025-05-22 18:04:28,538 - __main__ - INFO -     last_login: None
+2025-05-22 18:04:28,546 - __main__ - INFO -     failed_login_attempts: 0
+2025-05-22 18:04:28,547 - __main__ - INFO -     locked_until: None
+2025-05-22 18:04:28,547 - __main__ - INFO -     created_at: None
+2025-05-22 18:04:28,548 - __main__ - INFO -     updated_at: None
+2025-05-22 18:04:28,548 - __main__ - INFO -   Registro 2:
+2025-05-22 18:04:28,549 - __main__ - INFO -     id: 2
+2025-05-22 18:04:28,549 - __main__ - INFO -     full_name: Usuario de Prueba 2
+2025-05-22 18:04:28,549 - __main__ - INFO -     postal_code: 28002
+2025-05-22 18:04:28,550 - __main__ - INFO -     email: test@example.com
+2025-05-22 18:04:28,550 - __main__ - INFO -     password_hash: scrypt:32768:8:1$kb54sai1ebIEgoPw$768bb3edc4e37e23240c2f88a27b5760766bb2e06a75ca6f35137a85f84694e65db9f07b327b6827715129793091faa065411fb28b8437f3c345ac85baf2dc23
+2025-05-22 18:04:28,550 - __main__ - INFO -     is_confirmed: 1
+2025-05-22 18:04:28,551 - __main__ - INFO -     is_active: 1
+2025-05-22 18:04:28,551 - __main__ - INFO -     is_admin: 0
+2025-05-22 18:04:28,552 - __main__ - INFO -     last_login: None
+2025-05-22 18:04:28,552 - __main__ - INFO -     failed_login_attempts: 0
+2025-05-22 18:04:28,552 - __main__ - INFO -     locked_until: None
+2025-05-22 18:04:28,553 - __main__ - INFO -     created_at: None
+2025-05-22 18:04:28,553 - __main__ - INFO -     updated_at: None
+2025-05-22 18:04:28,553 - __main__ - INFO -   Registro 3:
+2025-05-22 18:04:28,554 - __main__ - INFO -     id: 3
+2025-05-22 18:04:28,554 - __main__ - INFO -     full_name: silvia rodriguez exposito
+2025-05-22 18:04:28,554 - __main__ - INFO -     postal_code: 48869
+2025-05-22 18:04:28,564 - __main__ - INFO -     email: silviarodriguezexposito.76@gmail.com
+2025-05-22 18:04:28,565 - __main__ - INFO -     password_hash: $2b$12$Ulnkav0/UyGDXVOMlxwNle3xCingSrgPWlP6xo/GRlnBWDIWY3B42
+2025-05-22 18:04:28,565 - __main__ - INFO -     is_confirmed: 1
+2025-05-22 18:04:28,565 - __main__ - INFO -     is_active: 1
+2025-05-22 18:04:28,566 - __main__ - INFO -     is_admin: 0
+2025-05-22 18:04:28,566 - __main__ - INFO -     last_login: 2025-05-18 12:29:04.299792
+2025-05-22 18:04:28,566 - __main__ - INFO -     failed_login_attempts: 0
+2025-05-22 18:04:28,567 - __main__ - INFO -     locked_until: None
+2025-05-22 18:04:28,567 - __main__ - INFO -     created_at: 2025-05-11 16:09:43.531766
+2025-05-22 18:04:28,568 - __main__ - INFO -     updated_at: 2025-05-18 12:29:04.301623
+2025-05-22 18:04:28,568 - __main__ - INFO - 
+==================================================
+2025-05-22 18:04:28,568 - __main__ - INFO - TABLA: wishlist
+2025-05-22 18:04:28,569 - __main__ - INFO - ==================================================
+2025-05-22 18:04:28,569 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:04:28,570 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY
+2025-05-22 18:04:28,570 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:04:28,571 - __main__ - INFO -   - curso_id (INTEGER) NOT NULL
+2025-05-22 18:04:28,571 - __main__ - INFO -   - created_at (TIMESTAMP)
+2025-05-22 18:04:28,577 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:05:33,798 - __main__ - INFO - Conectando a la base de datos: instance/akademiaKupula.db
+2025-05-22 18:05:33,801 - __main__ - INFO - Tablas encontradas: 10
+2025-05-22 18:05:33,801 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:33,802 - __main__ - INFO - TABLA: cart
+2025-05-22 18:05:33,802 - __main__ - INFO - ==================================================
+2025-05-22 18:05:33,802 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:33,809 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY
+2025-05-22 18:05:33,810 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:05:33,810 - __main__ - INFO -   - curso_id (INTEGER) NOT NULL
+2025-05-22 18:05:33,810 - __main__ - INFO -   - created_at (TIMESTAMP)
+2025-05-22 18:05:33,811 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:05:33,811 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:33,812 - __main__ - INFO - TABLA: contactos
+2025-05-22 18:05:33,812 - __main__ - INFO - ==================================================
+2025-05-22 18:05:33,813 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:33,813 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:05:33,813 - __main__ - INFO -   - nombre (VARCHAR(80)) NOT NULL
+2025-05-22 18:05:33,814 - __main__ - INFO -   - email (VARCHAR(120)) NOT NULL
+2025-05-22 18:05:33,814 - __main__ - INFO -   - telefono (VARCHAR(20))
+2025-05-22 18:05:33,817 - __main__ - INFO -   - curso (VARCHAR(50))
+2025-05-22 18:05:33,818 - __main__ - INFO -   - mensaje (TEXT) NOT NULL
+2025-05-22 18:05:33,818 - __main__ - INFO -   - fecha_creacion (DATETIME)
+2025-05-22 18:05:33,818 - __main__ - INFO -   - estado (TEXT)
+2025-05-22 18:05:33,819 - __main__ - INFO -   - fecha_actualizacion (TIMESTAMP)
+2025-05-22 18:05:33,819 - __main__ - INFO - Número de registros: 13
+2025-05-22 18:05:33,820 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:05:33,830 - __main__ - INFO -   Registro 1:
+2025-05-22 18:05:33,869 - __main__ - INFO -     id: 1
+2025-05-22 18:05:33,879 - __main__ - INFO -     nombre: paquita salas
+2025-05-22 18:05:33,881 - __main__ - INFO -     email: paqitasalas@gmail.com
+2025-05-22 18:05:33,882 - __main__ - INFO -     telefono: None
+2025-05-22 18:05:33,885 - __main__ - INFO -     curso: None
+2025-05-22 18:05:33,885 - __main__ - INFO -     mensaje: me gustaria saber el horario
+2025-05-22 18:05:33,893 - __main__ - INFO -     fecha_creacion: 2025-05-09 15:04:43
+2025-05-22 18:05:33,895 - __main__ - INFO -     estado: nuevo
+2025-05-22 18:05:33,896 - __main__ - INFO -     fecha_actualizacion: 2025-05-11T21:56:09.642379
+2025-05-22 18:05:33,897 - __main__ - INFO -   Registro 2:
+2025-05-22 18:05:33,902 - __main__ - INFO -     id: 2
+2025-05-22 18:05:33,903 - __main__ - INFO -     nombre: Contacto de Prueba
+2025-05-22 18:05:33,903 - __main__ - INFO -     email: test@example.com
+2025-05-22 18:05:33,903 - __main__ - INFO -     telefono: 612345678
+2025-05-22 18:05:33,912 - __main__ - INFO -     curso: maquillaje
+2025-05-22 18:05:33,913 - __main__ - INFO -     mensaje: Mensaje de prueba
+2025-05-22 18:05:33,913 - __main__ - INFO -     fecha_creacion: 2025-05-09 15:29:24
+2025-05-22 18:05:33,914 - __main__ - INFO -     estado: nuevo
+2025-05-22 18:05:33,915 - __main__ - INFO -     fecha_actualizacion: 2025-05-11T21:56:09.642379
+2025-05-22 18:05:33,920 - __main__ - INFO -   Registro 3:
+2025-05-22 18:05:33,925 - __main__ - INFO -     id: 3
+2025-05-22 18:05:33,937 - __main__ - INFO -     nombre: Usuario Test
+2025-05-22 18:05:33,968 - __main__ - INFO -     email: test@example.com
+2025-05-22 18:05:33,970 - __main__ - INFO -     telefono: None
+2025-05-22 18:05:33,970 - __main__ - INFO -     curso: None
+2025-05-22 18:05:34,002 - __main__ - INFO -     mensaje: Mensaje de prueba desde TestForm
+2025-05-22 18:05:34,003 - __main__ - INFO -     fecha_creacion: 2025-05-09 15:32:50
+2025-05-22 18:05:34,003 - __main__ - INFO -     estado: nuevo
+2025-05-22 18:05:34,003 - __main__ - INFO -     fecha_actualizacion: 2025-05-11T21:56:09.642379
+2025-05-22 18:05:34,012 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:34,013 - __main__ - INFO - TABLA: content
+2025-05-22 18:05:34,014 - __main__ - INFO - ==================================================
+2025-05-22 18:05:34,015 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:34,028 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:05:34,029 - __main__ - INFO -   - title (VARCHAR(200)) NOT NULL
+2025-05-22 18:05:34,030 - __main__ - INFO -   - slug (VARCHAR(200)) NOT NULL
+2025-05-22 18:05:34,030 - __main__ - INFO -   - content (TEXT) NOT NULL
+2025-05-22 18:05:34,031 - __main__ - INFO -   - summary (VARCHAR(500))
+2025-05-22 18:05:34,031 - __main__ - INFO -   - image_url (VARCHAR(255))
+2025-05-22 18:05:34,037 - __main__ - INFO -   - published (BOOLEAN)
+2025-05-22 18:05:34,046 - __main__ - INFO -   - featured (BOOLEAN)
+2025-05-22 18:05:34,047 - __main__ - INFO -   - content_type (VARCHAR(50))
+2025-05-22 18:05:34,047 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:05:34,048 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:05:34,048 - __main__ - INFO -   - author_id (INTEGER)
+2025-05-22 18:05:34,053 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:05:34,061 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:34,064 - __main__ - INFO - TABLA: cursos
+2025-05-22 18:05:34,065 - __main__ - INFO - ==================================================
+2025-05-22 18:05:34,068 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:34,069 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:05:34,069 - __main__ - INFO -   - titulo (VARCHAR(100)) NOT NULL
+2025-05-22 18:05:34,070 - __main__ - INFO -   - descripcion (TEXT) NOT NULL
+2025-05-22 18:05:34,070 - __main__ - INFO -   - duracion (VARCHAR(50))
+2025-05-22 18:05:34,080 - __main__ - INFO -   - precio (FLOAT)
+2025-05-22 18:05:34,081 - __main__ - INFO -   - imagen_url (TEXT)
+2025-05-22 18:05:34,084 - __main__ - INFO -   - nivel (TEXT)
+2025-05-22 18:05:34,085 - __main__ - INFO -   - instructor (TEXT)
+2025-05-22 18:05:34,087 - __main__ - INFO -   - destacado (BOOLEAN)
+2025-05-22 18:05:34,096 - __main__ - INFO -   - activo (BOOLEAN)
+2025-05-22 18:05:34,097 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:05:34,098 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:05:34,102 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:05:34,102 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:34,111 - __main__ - INFO - TABLA: order_items
+2025-05-22 18:05:34,112 - __main__ - INFO - ==================================================
+2025-05-22 18:05:34,113 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:34,119 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:05:34,119 - __main__ - INFO -   - order_id (INTEGER) NOT NULL
+2025-05-22 18:05:34,120 - __main__ - INFO -   - curso_id (INTEGER) NOT NULL
+2025-05-22 18:05:34,120 - __main__ - INFO -   - quantity (INTEGER)
+2025-05-22 18:05:34,125 - __main__ - INFO -   - price (FLOAT) NOT NULL
+2025-05-22 18:05:34,126 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:05:34,127 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:34,128 - __main__ - INFO - TABLA: orders
+2025-05-22 18:05:34,128 - __main__ - INFO - ==================================================
+2025-05-22 18:05:34,130 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:34,130 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:05:34,134 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:05:34,201 - __main__ - INFO -   - total_amount (FLOAT) NOT NULL
+2025-05-22 18:05:34,202 - __main__ - INFO -   - status (VARCHAR(50))
+2025-05-22 18:05:34,215 - __main__ - INFO -   - payment_method (VARCHAR(50))
+2025-05-22 18:05:34,216 - __main__ - INFO -   - payment_id (VARCHAR(255))
+2025-05-22 18:05:34,216 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:05:34,216 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:05:34,217 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:05:34,217 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:34,218 - __main__ - INFO - TABLA: sessions
+2025-05-22 18:05:34,218 - __main__ - INFO - ==================================================
+2025-05-22 18:05:34,219 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:34,219 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:05:34,220 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:05:34,220 - __main__ - INFO -   - token (VARCHAR(255)) NOT NULL
+2025-05-22 18:05:34,226 - __main__ - INFO -   - ip_address (VARCHAR(45))
+2025-05-22 18:05:34,227 - __main__ - INFO -   - user_agent (VARCHAR(255))
+2025-05-22 18:05:34,228 - __main__ - INFO -   - device_info (VARCHAR(255))
+2025-05-22 18:05:34,280 - __main__ - INFO -   - started_at (DATETIME)
+2025-05-22 18:05:34,284 - __main__ - INFO -   - ended_at (DATETIME)
+2025-05-22 18:05:34,303 - __main__ - INFO -   - is_active (BOOLEAN)
+2025-05-22 18:05:34,315 - __main__ - INFO -   - last_activity (DATETIME)
+2025-05-22 18:05:34,317 - __main__ - INFO - Número de registros: 36
+2025-05-22 18:05:34,332 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:05:34,334 - __main__ - INFO -   Registro 1:
+2025-05-22 18:05:34,335 - __main__ - INFO -     id: 1
+2025-05-22 18:05:34,336 - __main__ - INFO -     user_id: 3
+2025-05-22 18:05:34,336 - __main__ - INFO -     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzU2NTY2NywianRpIjoiMjAxOTQ2YTEtMWIyNS00MDJlLWFhMjgtZDJlZTY2Mzc3YWMwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NDc1NjU2NjcsImNzcmYiOiJmZDY0YzkyMS00MWIyLTQ4M2MtOWNjYS0wMjdiYTk5NGE2ZjAiLCJleHAiOjE3NDc2NTIwNjd9.qnrY62ZB-yAbGoDfXSd48Rg0vrwKP28-h_ygB4fl9pY
+2025-05-22 18:05:34,347 - __main__ - INFO -     ip_address: 127.0.0.1
+2025-05-22 18:05:34,347 - __main__ - INFO -     user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+2025-05-22 18:05:34,348 - __main__ - INFO -     device_info: None
+2025-05-22 18:05:34,349 - __main__ - INFO -     started_at: 2025-05-18 10:54:27.555696
+2025-05-22 18:05:34,349 - __main__ - INFO -     ended_at: None
+2025-05-22 18:05:34,368 - __main__ - INFO -     is_active: 1
+2025-05-22 18:05:34,369 - __main__ - INFO -     last_activity: 2025-05-18 10:54:27.555750
+2025-05-22 18:05:34,369 - __main__ - INFO -   Registro 2:
+2025-05-22 18:05:34,369 - __main__ - INFO -     id: 2
+2025-05-22 18:05:34,370 - __main__ - INFO -     user_id: 3
+2025-05-22 18:05:34,370 - __main__ - INFO -     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzU2ODE1MiwianRpIjoiYjQ3ZjNhN2ItMDllMi00MDUxLTg5ODEtMjMyYzY1ZTliZmIxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NDc1NjgxNTIsImNzcmYiOiJkODQyNzkwNC1iOWY1LTQ5YWItODdlYy03MTJmNWU2YjIzZjUiLCJleHAiOjE3NDc2NTQ1NTJ9.NJKFNYA7DtiY3CRlN9ErXGAadeI-OA-RvEpyGukqOhU
+2025-05-22 18:05:34,372 - __main__ - INFO -     ip_address: 127.0.0.1
+2025-05-22 18:05:34,380 - __main__ - INFO -     user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+2025-05-22 18:05:34,381 - __main__ - INFO -     device_info: None
+2025-05-22 18:05:34,381 - __main__ - INFO -     started_at: 2025-05-18 11:35:52.966912
+2025-05-22 18:05:34,381 - __main__ - INFO -     ended_at: None
+2025-05-22 18:05:34,382 - __main__ - INFO -     is_active: 1
+2025-05-22 18:05:34,382 - __main__ - INFO -     last_activity: 2025-05-18 11:35:52.966923
+2025-05-22 18:05:34,383 - __main__ - INFO -   Registro 3:
+2025-05-22 18:05:34,383 - __main__ - INFO -     id: 3
+2025-05-22 18:05:34,383 - __main__ - INFO -     user_id: 3
+2025-05-22 18:05:34,384 - __main__ - INFO -     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzU2ODE3NywianRpIjoiODZmZjdmMDUtNDQ2YS00YzAxLWI3ODMtOGI1MTk0NGVhMjFkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NDc1NjgxNzcsImNzcmYiOiIyNGE2ZDM0OC03Y2Y4LTRkMDctODIzZC05YzhmMDM1YmM5M2IiLCJleHAiOjE3NDc2NTQ1Nzd9.qlIbnwOPglcrmzYTRvEL5LKmQ6HJBa6CMXJw2HmL7RI
+2025-05-22 18:05:34,384 - __main__ - INFO -     ip_address: 127.0.0.1
+2025-05-22 18:05:34,384 - __main__ - INFO -     user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+2025-05-22 18:05:34,385 - __main__ - INFO -     device_info: None
+2025-05-22 18:05:34,385 - __main__ - INFO -     started_at: 2025-05-18 11:36:17.556600
+2025-05-22 18:05:34,395 - __main__ - INFO -     ended_at: None
+2025-05-22 18:05:34,397 - __main__ - INFO -     is_active: 1
+2025-05-22 18:05:34,398 - __main__ - INFO -     last_activity: 2025-05-18 11:36:17.556609
+2025-05-22 18:05:34,398 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:34,399 - __main__ - INFO - TABLA: sqlite_sequence
+2025-05-22 18:05:34,399 - __main__ - INFO - ==================================================
+2025-05-22 18:05:34,400 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:34,400 - __main__ - INFO -   - name ()
+2025-05-22 18:05:34,401 - __main__ - INFO -   - seq ()
+2025-05-22 18:05:34,401 - __main__ - INFO - Número de registros: 1
+2025-05-22 18:05:34,402 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:05:34,402 - __main__ - INFO -   Registro 1:
+2025-05-22 18:05:34,414 - __main__ - INFO -     name: users
+2025-05-22 18:05:34,414 - __main__ - INFO -     seq: 20
+2025-05-22 18:05:34,415 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:34,415 - __main__ - INFO - TABLA: users
+2025-05-22 18:05:34,416 - __main__ - INFO - ==================================================
+2025-05-22 18:05:34,418 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:34,418 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY
+2025-05-22 18:05:34,419 - __main__ - INFO -   - full_name (VARCHAR(120)) NOT NULL
+2025-05-22 18:05:34,419 - __main__ - INFO -   - postal_code (VARCHAR(20)) NOT NULL
+2025-05-22 18:05:34,420 - __main__ - INFO -   - email (VARCHAR(120)) NOT NULL
+2025-05-22 18:05:34,420 - __main__ - INFO -   - password_hash (VARCHAR(128)) NOT NULL
+2025-05-22 18:05:34,428 - __main__ - INFO -   - is_confirmed (BOOLEAN)
+2025-05-22 18:05:34,428 - __main__ - INFO -   - is_active (BOOLEAN)
+2025-05-22 18:05:34,430 - __main__ - INFO -   - is_admin (BOOLEAN)
+2025-05-22 18:05:34,432 - __main__ - INFO -   - last_login (DATETIME)
+2025-05-22 18:05:34,432 - __main__ - INFO -   - failed_login_attempts (INTEGER)
+2025-05-22 18:05:34,433 - __main__ - INFO -   - locked_until (DATETIME)
+2025-05-22 18:05:34,433 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:05:34,433 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:05:34,434 - __main__ - INFO - Número de registros: 20
+2025-05-22 18:05:34,435 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:05:34,435 - __main__ - INFO -   Registro 1:
+2025-05-22 18:05:34,448 - __main__ - INFO -     id: 1
+2025-05-22 18:05:34,449 - __main__ - INFO -     full_name: Usuario de Prueba
+2025-05-22 18:05:34,450 - __main__ - INFO -     postal_code: 28001
+2025-05-22 18:05:34,465 - __main__ - INFO -     email: usuario@ejemplo.com
+2025-05-22 18:05:34,466 - __main__ - INFO -     password_hash: scrypt:32768:8:1$1nxe1oUNpAjY7u3y$776e9dd465afdbc7b5b6ce2885970d68c1d944fc645da3927f0d894d3d42b7c71ec5263c139bfabd66e2a9e16963fe3770b1e7e951f6caf4a7f80fa7cf66a6fa
+2025-05-22 18:05:34,467 - __main__ - INFO -     is_confirmed: 1
+2025-05-22 18:05:34,468 - __main__ - INFO -     is_active: 1
+2025-05-22 18:05:34,479 - __main__ - INFO -     is_admin: 0
+2025-05-22 18:05:34,481 - __main__ - INFO -     last_login: None
+2025-05-22 18:05:34,481 - __main__ - INFO -     failed_login_attempts: 0
+2025-05-22 18:05:34,482 - __main__ - INFO -     locked_until: None
+2025-05-22 18:05:34,482 - __main__ - INFO -     created_at: None
+2025-05-22 18:05:34,483 - __main__ - INFO -     updated_at: None
+2025-05-22 18:05:34,483 - __main__ - INFO -   Registro 2:
+2025-05-22 18:05:34,483 - __main__ - INFO -     id: 2
+2025-05-22 18:05:34,484 - __main__ - INFO -     full_name: Usuario de Prueba 2
+2025-05-22 18:05:34,484 - __main__ - INFO -     postal_code: 28002
+2025-05-22 18:05:34,487 - __main__ - INFO -     email: test@example.com
+2025-05-22 18:05:34,489 - __main__ - INFO -     password_hash: scrypt:32768:8:1$kb54sai1ebIEgoPw$768bb3edc4e37e23240c2f88a27b5760766bb2e06a75ca6f35137a85f84694e65db9f07b327b6827715129793091faa065411fb28b8437f3c345ac85baf2dc23
+2025-05-22 18:05:34,497 - __main__ - INFO -     is_confirmed: 1
+2025-05-22 18:05:34,497 - __main__ - INFO -     is_active: 1
+2025-05-22 18:05:34,498 - __main__ - INFO -     is_admin: 0
+2025-05-22 18:05:34,498 - __main__ - INFO -     last_login: None
+2025-05-22 18:05:34,498 - __main__ - INFO -     failed_login_attempts: 0
+2025-05-22 18:05:34,499 - __main__ - INFO -     locked_until: None
+2025-05-22 18:05:34,500 - __main__ - INFO -     created_at: None
+2025-05-22 18:05:34,500 - __main__ - INFO -     updated_at: None
+2025-05-22 18:05:34,501 - __main__ - INFO -   Registro 3:
+2025-05-22 18:05:34,501 - __main__ - INFO -     id: 3
+2025-05-22 18:05:34,513 - __main__ - INFO -     full_name: silvia rodriguez exposito
+2025-05-22 18:05:34,514 - __main__ - INFO -     postal_code: 48869
+2025-05-22 18:05:34,514 - __main__ - INFO -     email: silviarodriguezexposito.76@gmail.com
+2025-05-22 18:05:34,515 - __main__ - INFO -     password_hash: $2b$12$Ulnkav0/UyGDXVOMlxwNle3xCingSrgPWlP6xo/GRlnBWDIWY3B42
+2025-05-22 18:05:34,515 - __main__ - INFO -     is_confirmed: 1
+2025-05-22 18:05:34,516 - __main__ - INFO -     is_active: 1
+2025-05-22 18:05:34,516 - __main__ - INFO -     is_admin: 0
+2025-05-22 18:05:34,517 - __main__ - INFO -     last_login: 2025-05-18 12:29:04.299792
+2025-05-22 18:05:34,517 - __main__ - INFO -     failed_login_attempts: 0
+2025-05-22 18:05:34,518 - __main__ - INFO -     locked_until: None
+2025-05-22 18:05:34,521 - __main__ - INFO -     created_at: 2025-05-11 16:09:43.531766
+2025-05-22 18:05:34,532 - __main__ - INFO -     updated_at: 2025-05-18 12:29:04.301623
+2025-05-22 18:05:34,533 - __main__ - INFO - 
+==================================================
+2025-05-22 18:05:34,533 - __main__ - INFO - TABLA: wishlist
+2025-05-22 18:05:34,534 - __main__ - INFO - ==================================================
+2025-05-22 18:05:34,534 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:05:34,535 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY
+2025-05-22 18:05:34,535 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:05:34,536 - __main__ - INFO -   - curso_id (INTEGER) NOT NULL
+2025-05-22 18:05:34,536 - __main__ - INFO -   - created_at (TIMESTAMP)
+2025-05-22 18:05:34,546 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:10:42,647 - __main__ - INFO - Conectando a la base de datos: instance/akademiaKupula.db
+2025-05-22 18:10:42,936 - __main__ - INFO - Tablas encontradas: 9
+2025-05-22 18:10:43,042 - __main__ - INFO - 
+==================================================
+2025-05-22 18:10:43,125 - __main__ - INFO - TABLA: cart
+2025-05-22 18:10:43,126 - __main__ - INFO - ==================================================
+2025-05-22 18:10:43,128 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:10:43,128 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY
+2025-05-22 18:10:43,128 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:10:43,129 - __main__ - INFO -   - curso_id (INTEGER) NOT NULL
+2025-05-22 18:10:43,129 - __main__ - INFO -   - created_at (TIMESTAMP)
+2025-05-22 18:10:43,131 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:10:43,157 - __main__ - INFO - 
+==================================================
+2025-05-22 18:10:43,160 - __main__ - INFO - TABLA: contactos
+2025-05-22 18:10:43,161 - __main__ - INFO - ==================================================
+2025-05-22 18:10:43,161 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:10:43,162 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:10:43,162 - __main__ - INFO -   - nombre (VARCHAR(80)) NOT NULL
+2025-05-22 18:10:43,163 - __main__ - INFO -   - email (VARCHAR(120)) NOT NULL
+2025-05-22 18:10:43,163 - __main__ - INFO -   - telefono (VARCHAR(20))
+2025-05-22 18:10:43,163 - __main__ - INFO -   - curso (VARCHAR(50))
+2025-05-22 18:10:43,165 - __main__ - INFO -   - mensaje (TEXT) NOT NULL
+2025-05-22 18:10:43,178 - __main__ - INFO -   - fecha_creacion (DATETIME)
+2025-05-22 18:10:43,197 - __main__ - INFO -   - estado (TEXT)
+2025-05-22 18:10:43,209 - __main__ - INFO -   - fecha_actualizacion (TIMESTAMP)
+2025-05-22 18:10:43,214 - __main__ - INFO - Número de registros: 13
+2025-05-22 18:10:43,225 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:10:43,229 - __main__ - INFO -   Registro 1:
+2025-05-22 18:10:43,232 - __main__ - INFO -     id: 1
+2025-05-22 18:10:43,245 - __main__ - INFO -     nombre: paquita salas
+2025-05-22 18:10:43,245 - __main__ - INFO -     email: paqitasalas@gmail.com
+2025-05-22 18:10:43,246 - __main__ - INFO -     telefono: None
+2025-05-22 18:10:43,248 - __main__ - INFO -     curso: None
+2025-05-22 18:10:43,248 - __main__ - INFO -     mensaje: me gustaria saber el horario
+2025-05-22 18:10:43,263 - __main__ - INFO -     fecha_creacion: 2025-05-09 15:04:43
+2025-05-22 18:10:43,264 - __main__ - INFO -     estado: nuevo
+2025-05-22 18:10:43,264 - __main__ - INFO -     fecha_actualizacion: 2025-05-11T21:56:09.642379
+2025-05-22 18:10:43,275 - __main__ - INFO -   Registro 2:
+2025-05-22 18:10:43,279 - __main__ - INFO -     id: 2
+2025-05-22 18:10:43,279 - __main__ - INFO -     nombre: Contacto de Prueba
+2025-05-22 18:10:43,280 - __main__ - INFO -     email: test@example.com
+2025-05-22 18:10:43,280 - __main__ - INFO -     telefono: 612345678
+2025-05-22 18:10:43,281 - __main__ - INFO -     curso: maquillaje
+2025-05-22 18:10:43,281 - __main__ - INFO -     mensaje: Mensaje de prueba
+2025-05-22 18:10:43,291 - __main__ - INFO -     fecha_creacion: 2025-05-09 15:29:24
+2025-05-22 18:10:43,296 - __main__ - INFO -     estado: nuevo
+2025-05-22 18:10:43,296 - __main__ - INFO -     fecha_actualizacion: 2025-05-11T21:56:09.642379
+2025-05-22 18:10:43,298 - __main__ - INFO -   Registro 3:
+2025-05-22 18:10:43,298 - __main__ - INFO -     id: 3
+2025-05-22 18:10:43,312 - __main__ - INFO -     nombre: Usuario Test
+2025-05-22 18:10:43,313 - __main__ - INFO -     email: test@example.com
+2025-05-22 18:10:43,313 - __main__ - INFO -     telefono: None
+2025-05-22 18:10:43,313 - __main__ - INFO -     curso: None
+2025-05-22 18:10:43,314 - __main__ - INFO -     mensaje: Mensaje de prueba desde TestForm
+2025-05-22 18:10:43,314 - __main__ - INFO -     fecha_creacion: 2025-05-09 15:32:50
+2025-05-22 18:10:43,324 - __main__ - INFO -     estado: nuevo
+2025-05-22 18:10:43,329 - __main__ - INFO -     fecha_actualizacion: 2025-05-11T21:56:09.642379
+2025-05-22 18:10:43,329 - __main__ - INFO - 
+==================================================
+2025-05-22 18:10:43,330 - __main__ - INFO - TABLA: cursos
+2025-05-22 18:10:43,330 - __main__ - INFO - ==================================================
+2025-05-22 18:10:43,341 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:10:43,345 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:10:43,345 - __main__ - INFO -   - titulo (VARCHAR(100)) NOT NULL
+2025-05-22 18:10:43,346 - __main__ - INFO -   - descripcion (TEXT) NOT NULL
+2025-05-22 18:10:43,346 - __main__ - INFO -   - duracion (VARCHAR(50))
+2025-05-22 18:10:43,346 - __main__ - INFO -   - precio (FLOAT)
+2025-05-22 18:10:43,347 - __main__ - INFO -   - imagen_url (TEXT)
+2025-05-22 18:10:43,347 - __main__ - INFO -   - nivel (TEXT)
+2025-05-22 18:10:43,347 - __main__ - INFO -   - instructor (TEXT)
+2025-05-22 18:10:43,348 - __main__ - INFO -   - destacado (BOOLEAN)
+2025-05-22 18:10:43,348 - __main__ - INFO -   - activo (BOOLEAN)
+2025-05-22 18:10:43,362 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:10:43,365 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:10:43,376 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:10:43,380 - __main__ - INFO - 
+==================================================
+2025-05-22 18:10:43,381 - __main__ - INFO - TABLA: order_items
+2025-05-22 18:10:43,381 - __main__ - INFO - ==================================================
+2025-05-22 18:10:43,394 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:10:43,395 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:10:43,396 - __main__ - INFO -   - order_id (INTEGER) NOT NULL
+2025-05-22 18:10:43,397 - __main__ - INFO -   - curso_id (INTEGER) NOT NULL
+2025-05-22 18:10:43,397 - __main__ - INFO -   - quantity (INTEGER)
+2025-05-22 18:10:43,397 - __main__ - INFO -   - price (FLOAT) NOT NULL
+2025-05-22 18:10:43,398 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:10:43,411 - __main__ - INFO - 
+==================================================
+2025-05-22 18:10:43,412 - __main__ - INFO - TABLA: orders
+2025-05-22 18:10:43,413 - __main__ - INFO - ==================================================
+2025-05-22 18:10:43,414 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:10:43,414 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:10:43,415 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:10:43,427 - __main__ - INFO -   - total_amount (FLOAT) NOT NULL
+2025-05-22 18:10:43,428 - __main__ - INFO -   - status (VARCHAR(50))
+2025-05-22 18:10:43,429 - __main__ - INFO -   - payment_method (VARCHAR(50))
+2025-05-22 18:10:43,430 - __main__ - INFO -   - payment_id (VARCHAR(255))
+2025-05-22 18:10:43,430 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:10:43,431 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:10:43,432 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:10:43,446 - __main__ - INFO - 
+==================================================
+2025-05-22 18:10:43,446 - __main__ - INFO - TABLA: sessions
+2025-05-22 18:10:43,447 - __main__ - INFO - ==================================================
+2025-05-22 18:10:43,448 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:10:43,448 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY NOT NULL
+2025-05-22 18:10:43,448 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:10:43,464 - __main__ - INFO -   - token (VARCHAR(255)) NOT NULL
+2025-05-22 18:10:43,464 - __main__ - INFO -   - ip_address (VARCHAR(45))
+2025-05-22 18:10:43,465 - __main__ - INFO -   - user_agent (VARCHAR(255))
+2025-05-22 18:10:43,478 - __main__ - INFO -   - device_info (VARCHAR(255))
+2025-05-22 18:10:43,479 - __main__ - INFO -   - started_at (DATETIME)
+2025-05-22 18:10:43,479 - __main__ - INFO -   - ended_at (DATETIME)
+2025-05-22 18:10:43,479 - __main__ - INFO -   - is_active (BOOLEAN)
+2025-05-22 18:10:43,480 - __main__ - INFO -   - last_activity (DATETIME)
+2025-05-22 18:10:43,481 - __main__ - INFO - Número de registros: 36
+2025-05-22 18:10:43,482 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:10:43,498 - __main__ - INFO -   Registro 1:
+2025-05-22 18:10:43,498 - __main__ - INFO -     id: 1
+2025-05-22 18:10:43,510 - __main__ - INFO -     user_id: 3
+2025-05-22 18:10:43,512 - __main__ - INFO -     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzU2NTY2NywianRpIjoiMjAxOTQ2YTEtMWIyNS00MDJlLWFhMjgtZDJlZTY2Mzc3YWMwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NDc1NjU2NjcsImNzcmYiOiJmZDY0YzkyMS00MWIyLTQ4M2MtOWNjYS0wMjdiYTk5NGE2ZjAiLCJleHAiOjE3NDc2NTIwNjd9.qnrY62ZB-yAbGoDfXSd48Rg0vrwKP28-h_ygB4fl9pY
+2025-05-22 18:10:43,512 - __main__ - INFO -     ip_address: 127.0.0.1
+2025-05-22 18:10:43,513 - __main__ - INFO -     user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+2025-05-22 18:10:43,513 - __main__ - INFO -     device_info: None
+2025-05-22 18:10:43,515 - __main__ - INFO -     started_at: 2025-05-18 10:54:27.555696
+2025-05-22 18:10:43,530 - __main__ - INFO -     ended_at: None
+2025-05-22 18:10:43,531 - __main__ - INFO -     is_active: 1
+2025-05-22 18:10:43,542 - __main__ - INFO -     last_activity: 2025-05-18 10:54:27.555750
+2025-05-22 18:10:43,543 - __main__ - INFO -   Registro 2:
+2025-05-22 18:10:43,543 - __main__ - INFO -     id: 2
+2025-05-22 18:10:43,544 - __main__ - INFO -     user_id: 3
+2025-05-22 18:10:43,545 - __main__ - INFO -     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzU2ODE1MiwianRpIjoiYjQ3ZjNhN2ItMDllMi00MDUxLTg5ODEtMjMyYzY1ZTliZmIxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NDc1NjgxNTIsImNzcmYiOiJkODQyNzkwNC1iOWY1LTQ5YWItODdlYy03MTJmNWU2YjIzZjUiLCJleHAiOjE3NDc2NTQ1NTJ9.NJKFNYA7DtiY3CRlN9ErXGAadeI-OA-RvEpyGukqOhU
+2025-05-22 18:10:43,545 - __main__ - INFO -     ip_address: 127.0.0.1
+2025-05-22 18:10:43,546 - __main__ - INFO -     user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+2025-05-22 18:10:43,546 - __main__ - INFO -     device_info: None
+2025-05-22 18:10:43,547 - __main__ - INFO -     started_at: 2025-05-18 11:35:52.966912
+2025-05-22 18:10:43,548 - __main__ - INFO -     ended_at: None
+2025-05-22 18:10:43,559 - __main__ - INFO -     is_active: 1
+2025-05-22 18:10:43,559 - __main__ - INFO -     last_activity: 2025-05-18 11:35:52.966923
+2025-05-22 18:10:43,560 - __main__ - INFO -   Registro 3:
+2025-05-22 18:10:43,565 - __main__ - INFO -     id: 3
+2025-05-22 18:10:43,575 - __main__ - INFO -     user_id: 3
+2025-05-22 18:10:43,577 - __main__ - INFO -     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzU2ODE3NywianRpIjoiODZmZjdmMDUtNDQ2YS00YzAxLWI3ODMtOGI1MTk0NGVhMjFkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NDc1NjgxNzcsImNzcmYiOiIyNGE2ZDM0OC03Y2Y4LTRkMDctODIzZC05YzhmMDM1YmM5M2IiLCJleHAiOjE3NDc2NTQ1Nzd9.qlIbnwOPglcrmzYTRvEL5LKmQ6HJBa6CMXJw2HmL7RI
+2025-05-22 18:10:43,579 - __main__ - INFO -     ip_address: 127.0.0.1
+2025-05-22 18:10:43,595 - __main__ - INFO -     user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+2025-05-22 18:10:43,596 - __main__ - INFO -     device_info: None
+2025-05-22 18:10:43,607 - __main__ - INFO -     started_at: 2025-05-18 11:36:17.556600
+2025-05-22 18:10:43,608 - __main__ - INFO -     ended_at: None
+2025-05-22 18:10:43,608 - __main__ - INFO -     is_active: 1
+2025-05-22 18:10:43,609 - __main__ - INFO -     last_activity: 2025-05-18 11:36:17.556609
+2025-05-22 18:10:43,609 - __main__ - INFO - 
+==================================================
+2025-05-22 18:10:43,609 - __main__ - INFO - TABLA: sqlite_sequence
+2025-05-22 18:10:43,610 - __main__ - INFO - ==================================================
+2025-05-22 18:10:43,611 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:10:43,611 - __main__ - INFO -   - name ()
+2025-05-22 18:10:43,611 - __main__ - INFO -   - seq ()
+2025-05-22 18:10:43,612 - __main__ - INFO - Número de registros: 0
+2025-05-22 18:10:43,613 - __main__ - INFO - 
+==================================================
+2025-05-22 18:10:43,623 - __main__ - INFO - TABLA: users
+2025-05-22 18:10:43,630 - __main__ - INFO - ==================================================
+2025-05-22 18:10:43,631 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:10:43,677 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY
+2025-05-22 18:10:43,724 - __main__ - INFO -   - full_name (VARCHAR(120)) NOT NULL
+2025-05-22 18:10:43,725 - __main__ - INFO -   - postal_code (VARCHAR(20)) NOT NULL
+2025-05-22 18:10:43,727 - __main__ - INFO -   - email (VARCHAR(120)) NOT NULL
+2025-05-22 18:10:43,728 - __main__ - INFO -   - password_hash (VARCHAR(128)) NOT NULL
+2025-05-22 18:10:43,741 - __main__ - INFO -   - is_confirmed (BOOLEAN)
+2025-05-22 18:10:43,743 - __main__ - INFO -   - is_active (BOOLEAN)
+2025-05-22 18:10:43,745 - __main__ - INFO -   - is_admin (BOOLEAN)
+2025-05-22 18:10:43,746 - __main__ - INFO -   - last_login (DATETIME)
+2025-05-22 18:10:43,746 - __main__ - INFO -   - failed_login_attempts (INTEGER)
+2025-05-22 18:10:43,755 - __main__ - INFO -   - locked_until (DATETIME)
+2025-05-22 18:10:43,756 - __main__ - INFO -   - created_at (DATETIME)
+2025-05-22 18:10:43,778 - __main__ - INFO -   - updated_at (DATETIME)
+2025-05-22 18:10:43,779 - __main__ - INFO - Número de registros: 20
+2025-05-22 18:10:43,780 - __main__ - INFO - Ejemplos de registros:
+2025-05-22 18:10:43,780 - __main__ - INFO -   Registro 1:
+2025-05-22 18:10:43,781 - __main__ - INFO -     id: 1
+2025-05-22 18:10:43,781 - __main__ - INFO -     full_name: Usuario de Prueba
+2025-05-22 18:10:43,782 - __main__ - INFO -     postal_code: 28001
+2025-05-22 18:10:43,787 - __main__ - INFO -     email: usuario@ejemplo.com
+2025-05-22 18:10:43,788 - __main__ - INFO -     password_hash: scrypt:32768:8:1$1nxe1oUNpAjY7u3y$776e9dd465afdbc7b5b6ce2885970d68c1d944fc645da3927f0d894d3d42b7c71ec5263c139bfabd66e2a9e16963fe3770b1e7e951f6caf4a7f80fa7cf66a6fa
+2025-05-22 18:10:43,788 - __main__ - INFO -     is_confirmed: 1
+2025-05-22 18:10:43,797 - __main__ - INFO -     is_active: 1
+2025-05-22 18:10:43,797 - __main__ - INFO -     is_admin: 0
+2025-05-22 18:10:43,798 - __main__ - INFO -     last_login: None
+2025-05-22 18:10:43,798 - __main__ - INFO -     failed_login_attempts: 0
+2025-05-22 18:10:43,799 - __main__ - INFO -     locked_until: None
+2025-05-22 18:10:43,800 - __main__ - INFO -     created_at: None
+2025-05-22 18:10:43,801 - __main__ - INFO -     updated_at: None
+2025-05-22 18:10:43,802 - __main__ - INFO -   Registro 2:
+2025-05-22 18:10:43,805 - __main__ - INFO -     id: 2
+2025-05-22 18:10:43,814 - __main__ - INFO -     full_name: Usuario de Prueba 2
+2025-05-22 18:10:43,814 - __main__ - INFO -     postal_code: 28002
+2025-05-22 18:10:43,815 - __main__ - INFO -     email: test@example.com
+2025-05-22 18:10:43,815 - __main__ - INFO -     password_hash: scrypt:32768:8:1$kb54sai1ebIEgoPw$768bb3edc4e37e23240c2f88a27b5760766bb2e06a75ca6f35137a85f84694e65db9f07b327b6827715129793091faa065411fb28b8437f3c345ac85baf2dc23
+2025-05-22 18:10:43,817 - __main__ - INFO -     is_confirmed: 1
+2025-05-22 18:10:43,818 - __main__ - INFO -     is_active: 1
+2025-05-22 18:10:43,820 - __main__ - INFO -     is_admin: 0
+2025-05-22 18:10:43,821 - __main__ - INFO -     last_login: None
+2025-05-22 18:10:43,822 - __main__ - INFO -     failed_login_attempts: 0
+2025-05-22 18:10:43,822 - __main__ - INFO -     locked_until: None
+2025-05-22 18:10:43,832 - __main__ - INFO -     created_at: None
+2025-05-22 18:10:43,834 - __main__ - INFO -     updated_at: None
+2025-05-22 18:10:43,835 - __main__ - INFO -   Registro 3:
+2025-05-22 18:10:43,847 - __main__ - INFO -     id: 3
+2025-05-22 18:10:43,848 - __main__ - INFO -     full_name: silvia rodriguez exposito
+2025-05-22 18:10:43,848 - __main__ - INFO -     postal_code: 48869
+2025-05-22 18:10:43,850 - __main__ - INFO -     email: silviarodriguezexposito.76@gmail.com
+2025-05-22 18:10:43,859 - __main__ - INFO -     password_hash: $2b$12$Ulnkav0/UyGDXVOMlxwNle3xCingSrgPWlP6xo/GRlnBWDIWY3B42
+2025-05-22 18:10:43,860 - __main__ - INFO -     is_confirmed: 1
+2025-05-22 18:10:43,860 - __main__ - INFO -     is_active: 1
+2025-05-22 18:10:43,861 - __main__ - INFO -     is_admin: 0
+2025-05-22 18:10:43,861 - __main__ - INFO -     last_login: 2025-05-18 12:29:04.299792
+2025-05-22 18:10:43,862 - __main__ - INFO -     failed_login_attempts: 0
+2025-05-22 18:10:43,863 - __main__ - INFO -     locked_until: None
+2025-05-22 18:10:43,863 - __main__ - INFO -     created_at: 2025-05-11 16:09:43.531766
+2025-05-22 18:10:43,870 - __main__ - INFO -     updated_at: 2025-05-18 12:29:04.301623
+2025-05-22 18:10:43,871 - __main__ - INFO - 
+==================================================
+2025-05-22 18:10:43,878 - __main__ - INFO - TABLA: wishlist
+2025-05-22 18:10:43,881 - __main__ - INFO - ==================================================
+2025-05-22 18:10:43,888 - __main__ - INFO - Estructura de la tabla:
+2025-05-22 18:10:43,897 - __main__ - INFO -   - id (INTEGER) PRIMARY KEY
+2025-05-22 18:10:43,897 - __main__ - INFO -   - user_id (INTEGER) NOT NULL
+2025-05-22 18:10:43,897 - __main__ - INFO -   - curso_id (INTEGER) NOT NULL
+2025-05-22 18:10:43,898 - __main__ - INFO -   - created_at (TIMESTAMP)
+2025-05-22 18:10:43,900 - __main__ - INFO - Número de registros: 0

@@ -1,0 +1,40 @@
+2025-05-22 18:05:15,128 - __main__ - INFO - Conectando a la base de datos: instance/akademiaKupula.db
+2025-05-22 18:05:15,131 - __main__ - INFO - Copia de seguridad creada en: instance/akademiaKupula.db.bak
+2025-05-22 18:05:15,133 - __main__ - INFO - Eliminando tabla: test_users
+2025-05-22 18:05:15,165 - __main__ - INFO - Tabla test_users eliminada correctamente
+2025-05-22 18:05:15,169 - __main__ - INFO - Limpiando sesiones inactivas o antiguas
+2025-05-22 18:05:15,171 - __main__ - INFO - Se eliminaron 0 sesiones inactivas o antiguas
+2025-05-22 18:05:15,187 - __main__ - INFO - Limpieza de la base de datos completada
+2025-05-22 18:08:44,807 - __main__ - INFO - Conectando a la base de datos: instance/akademiaKupula.db
+2025-05-22 18:08:44,856 - __main__ - INFO - Copia de seguridad creada en: instance/akademiaKupula.db.bak
+2025-05-22 18:08:44,906 - __main__ - WARNING - ADVERTENCIA: Eliminar la tabla sqlite_sequence puede causar problemas con la generación de nuevos IDs en tablas con autoincremento.
+2025-05-22 18:08:45,021 - __main__ - INFO - Eliminando tabla: test_users
+2025-05-22 18:08:45,092 - __main__ - INFO - Tabla test_users eliminada correctamente
+2025-05-22 18:08:45,128 - __main__ - INFO - Eliminando tabla: sqlite_sequence
+2025-05-22 18:08:45,148 - __main__ - ERROR - Error al eliminar tabla sqlite_sequence: table sqlite_sequence may not be dropped
+2025-05-22 18:08:45,205 - __main__ - INFO - Limpiando sesiones inactivas o antiguas
+2025-05-22 18:08:45,257 - __main__ - INFO - Se eliminaron 0 sesiones inactivas o antiguas
+2025-05-22 18:08:45,307 - __main__ - INFO - Limpieza de la base de datos completada
+2025-05-22 18:09:43,995 - __main__ - INFO - Conectando a la base de datos: instance/akademiaKupula.db
+2025-05-22 18:09:43,998 - __main__ - INFO - Copia de seguridad creada en: instance/akademiaKupula.db.bak
+2025-05-22 18:09:44,002 - __main__ - WARNING - ADVERTENCIA: Eliminar la tabla sqlite_sequence puede causar problemas con la generación de nuevos IDs en tablas con autoincremento.
+2025-05-22 18:09:44,003 - __main__ - INFO - Eliminando tabla: test_users
+2025-05-22 18:09:44,004 - __main__ - INFO - Tabla test_users eliminada correctamente
+2025-05-22 18:09:44,005 - __main__ - INFO - Eliminando tabla: sqlite_sequence
+2025-05-22 18:09:44,005 - __main__ - ERROR - Error al eliminar tabla sqlite_sequence: table sqlite_sequence may not be dropped
+2025-05-22 18:09:44,005 - __main__ - INFO - Eliminando tabla: content
+2025-05-22 18:09:44,012 - __main__ - INFO - Tabla content eliminada correctamente
+2025-05-22 18:09:44,013 - __main__ - INFO - Limpiando sesiones inactivas o antiguas
+2025-05-22 18:09:44,013 - __main__ - INFO - Se eliminaron 0 sesiones inactivas o antiguas
+2025-05-22 18:09:44,015 - __main__ - INFO - Limpieza de la base de datos completada
+2025-05-22 18:10:27,673 - __main__ - INFO - Conectando a la base de datos: instance/akademiaKupula.db
+2025-05-22 18:10:27,676 - __main__ - INFO - Copia de seguridad creada en: instance/akademiaKupula.db.bak
+2025-05-22 18:10:27,677 - __main__ - INFO - Eliminando tabla: test_users
+2025-05-22 18:10:27,678 - __main__ - INFO - Tabla test_users eliminada correctamente
+2025-05-22 18:10:27,678 - __main__ - INFO - Eliminando tabla: content
+2025-05-22 18:10:27,679 - __main__ - INFO - Tabla content eliminada correctamente
+2025-05-22 18:10:27,679 - __main__ - INFO - Vaciando tabla sqlite_sequence para reiniciar contadores de autoincremento
+2025-05-22 18:10:27,696 - __main__ - INFO - Tabla sqlite_sequence vaciada correctamente
+2025-05-22 18:10:27,707 - __main__ - INFO - Limpiando sesiones inactivas o antiguas
+2025-05-22 18:10:27,708 - __main__ - INFO - Se eliminaron 0 sesiones inactivas o antiguas
+2025-05-22 18:10:27,745 - __main__ - INFO - Limpieza de la base de datos completada

@@ -10,11 +10,18 @@ def register_models():
     from .contacto import Contacto
     from .wishlist import Wishlist
     from .cart import Cart
+    from .order import Order, OrderItem
+    from .session import Session
+    from .content import Content
 
     return {
         'User': User,
         'Curso': Curso,
         'Contacto': Contacto,
         'Wishlist': Wishlist,
-        'Cart': Cart
+        'Cart': Cart,
+        'Order': Order,
+        'OrderItem': OrderItem,
+        'Session': Session,
+        'Content': Content
     }

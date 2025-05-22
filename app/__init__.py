@@ -125,7 +125,6 @@ def create_app():
         except Exception as e:
             logger.error(f"Error creating database tables: {e}")
 
-    # Request processing time middleware
     @app.before_request
     def before_request():
         request.start_time = time.time()
@@ -139,7 +138,7 @@ def create_app():
 
         # Add security headers
         response.headers['X-Content-Type-Options'] = 'nosniff'
-        response.headers['X-Frame-Options'] = 'SAMEORIGIN'  # Cambiado de DENY a SAMEORIGIN para permitir iframes desde el mismo origen
+        response.headers['X-Frame-Options'] = 'SAMEORIGIN' 
         response.headers['X-XSS-Protection'] = '1; mode=block'
 
         return response
@@ -152,12 +151,12 @@ def create_app():
     # Register blueprints
     logger.info("Registering blueprints")
     from app.routes.auth_routes import auth
+    from app.routes.admin_courses import admin_courses_bp
     from app.routes.cursos import cursos_bp
     from app.routes.test_routes import test_bp
     from app.routes.contacto_routes import contacto_bp
     from app.routes.user_courses import user_courses_bp
     from app.routes.admin_routes import admin_bp
-    from app.routes.content_routes import content_bp
     from app.routes.session_routes import sessions_bp
 
     # Intentar importar rutas de pago si existen
@@ -168,13 +167,13 @@ def create_app():
         has_payment_routes = False
         logger.warning("No se pudieron importar las rutas de pago")
 
+    app.register_blueprint(admin_courses_bp, url_prefix='/api/admin_courses')
     app.register_blueprint(auth, url_prefix='/api/auth')
     app.register_blueprint(cursos_bp, url_prefix='/api/cursos')
     app.register_blueprint(test_bp, url_prefix='/api/test')
     app.register_blueprint(contacto_bp, url_prefix='/api/contacto')
     app.register_blueprint(user_courses_bp, url_prefix='/api/user')
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
-    app.register_blueprint(content_bp, url_prefix='/api/content')
     app.register_blueprint(sessions_bp, url_prefix='/api/sessions')
 
     # Registrar rutas de pago si existen
