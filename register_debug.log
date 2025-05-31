@@ -7,3 +7,12 @@ Usuario instanciado correctamente
 Contraseña establecida correctamente
 Usuario añadido a la sesión
 Usuario creado con ID: 21
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'amaya soler', 'postal_code': '48004', 'email': 'amayasoler@gmail.com', 'password': '098767890'}
+Verificando si el email ya está registrado: amayasoler@gmail.com
+Creando nuevo usuario: amaya soler, amayasoler@gmail.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 22
