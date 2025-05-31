@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models.user import User
 from app.models.contacto import Contacto
+from app.models.session import Session  # Asegúrate de importar el modelo Session
+from app.models.order import Order, OrderItem # Asegúrate de tener este modelo
 from app import db
 from app.utils.auth_middleware import admin_required
 
@@ -214,5 +216,74 @@ def get_contacts():
         return jsonify({
             "success": False,
             "message": f"Error al obtener mensajes de contacto: {str(e)}",
+            "data": None
+        }), 500
+
+@admin_bp.route('/sessions', methods=['GET'])
+@jwt_required()
+@admin_required
+def get_all_sessions():
+    """Endpoint para obtener todas las sesiones de todos los usuarios (solo admin)"""
+    try:
+        # Parámetros de paginación
+        page = request.args.get('page', 1, type=int)
+        per_page = request.args.get('per_page', 20, type=int)
+
+        sessions_query = Session.query.order_by(Session.started_at.desc())
+        pagination = sessions_query.paginate(page=page, per_page=per_page, error_out=False)
+        sessions = [session.to_dict() for session in pagination.items]
+
+        return jsonify({
+            "success": True,
+            "message": "Sesiones obtenidas correctamente",
+            "data": {
+                "sessions": sessions,
+                "total": pagination.total,
+                "page": pagination.page,
+                "pages": pagination.pages
+            }
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "message": f"Error al obtener sesiones: {str(e)}",
+            "data": None
+        }), 500
+
+@admin_bp.route('/orders', methods=['GET'])
+@jwt_required()
+@admin_required
+def get_all_orders():
+    """Endpoint para obtener todos los pedidos (orders) de todos los usuarios (solo admin)"""
+    try:
+        # Parámetros de paginación
+        page = request.args.get('page', 1, type=int)
+        per_page = request.args.get('per_page', 20, type=int)
+
+        orders_query = Order.query.order_by(Order.created_at.desc())
+        pagination = orders_query.paginate(page=page, per_page=per_page, error_out=False)
+        orders = []
+        for order in pagination.items:
+            # Obtener los ítems del pedido desde la tabla orders_items
+            items = OrderItem.query.filter_by(order_id=order.id).all()
+            items_data = [item.to_dict() for item in items]
+            order_data = order.to_dict()
+            order_data['items'] = items_data
+            orders.append(order_data)
+
+        return jsonify({
+            "success": True,
+            "message": "Pedidos obtenidos correctamente",
+            "data": {
+                "orders": orders,
+                "total": pagination.total,
+                "page": pagination.page,
+                "pages": pagination.pages
+            }
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "message": f"Error al obtener pedidos: {str(e)}",
             "data": None
         }), 500

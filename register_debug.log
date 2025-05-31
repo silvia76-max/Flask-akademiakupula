@@ -1,0 +1,9 @@
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'maria lafaraona', 'postal_code': '48002', 'email': 'lafaraona@gmail.com', 'password': '123454321'}
+Verificando si el email ya está registrado: lafaraona@gmail.com
+Creando nuevo usuario: maria lafaraona, lafaraona@gmail.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 21
