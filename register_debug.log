@@ -16,3 +16,12 @@ Usuario instanciado correctamente
 Contraseña establecida correctamente
 Usuario añadido a la sesión
 Usuario creado con ID: 22
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'alicia mendoza', 'postal_code': '48001', 'email': 'aliciamendoza@gmail.com', 'password': '000111555'}
+Verificando si el email ya está registrado: aliciamendoza@gmail.com
+Creando nuevo usuario: alicia mendoza, aliciamendoza@gmail.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 23
