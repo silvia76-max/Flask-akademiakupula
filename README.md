@@ -71,7 +71,7 @@ Este es el backend para la aplicación web **Akademia Kupula**, desarrollado con
    flask db upgrade
    ```
 5.2 **vista y relaciones de la base de datos
-![Vista de la base de datos](assets/db_diagram.png)
+![Vista de la base de datos](assets/db-relaciones.png)
 
 ## Ejecución
 
