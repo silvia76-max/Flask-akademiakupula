@@ -64,12 +64,14 @@ Este es el backend para la aplicación web **Akademia Kupula**, desarrollado con
    STRIPE_WEBHOOK_SECRET=whsec_xxx
    ```
 
-5. **Inicializar la base de datos:**
+5.1 **Inicializar la base de datos:**
    ```bash
    flask db init
    flask db migrate -m "Initial migration"
    flask db upgrade
    ```
+5.2 **vista y relaciones de la base de datos
+![Vista de la base de datos](assets/db_diagram.png)
 
 ## Ejecución
 
@@ -185,3 +187,5 @@ Flask-akademiaKupula/
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+
