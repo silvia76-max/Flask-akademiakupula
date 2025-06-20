@@ -25,3 +25,12 @@ Usuario instanciado correctamente
 Contraseña establecida correctamente
 Usuario añadido a la sesión
 Usuario creado con ID: 23
+Recibida solicitud de registro
+Datos recibidos: {'full_name': 'marta sanchez', 'postal_code': '70117', 'email': 'martasanchez@gmail.com', 'password': '111000222999'}
+Verificando si el email ya está registrado: martasanchez@gmail.com
+Creando nuevo usuario: marta sanchez, martasanchez@gmail.com
+Creando usuario directamente en la ruta
+Usuario instanciado correctamente
+Contraseña establecida correctamente
+Usuario añadido a la sesión
+Usuario creado con ID: 24
